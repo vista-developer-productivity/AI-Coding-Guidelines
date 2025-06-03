@@ -1,10 +1,10 @@
-**Coaching AI Coding Agents: A Guide for Senior Engineers**
+**Coaching AI Coding Agents: A Guide for Engineers**
 
-This guide is structured to help senior engineers transition effectively from traditional coding roles to becoming expert coaches and master debuggers for AI coding agents in immersive environments like Replit or Windsurf.
+This guide is structured to help  engineers transition effectively from traditional coding roles to becoming expert coaches and master debuggers for AI coding agents in immersive environments like Replit or Windsurf.
 
-**The Changing Role of Senior Engineers**
+**The Changing Role of Engineers**
 
-In the era of AI-assisted coding, senior engineers shift from hands-on coding toward strategic oversight. Your primary responsibilities become clearly articulating problems, guiding AI-driven design processes, validating AI outputs, and debugging complex interactions. Embrace your role as a master coach and debugger, empowering AI to deliver precise, effective solutions.
+In the era of AI-assisted coding, engineers shift from hands-on coding toward strategic oversight. Your primary responsibilities become clearly articulating problems, guiding AI-driven design processes, validating AI outputs, and debugging complex interactions. Embrace your role as a master coach and debugger, empowering AI to deliver precise, effective solutions.
 
 Many of the strategies outlined below can and should be done collaboratively with the AI. You can ask the AI to provide best practices. You can ask the AI to document these and build them along with you. You can ask the AI to create tooling and comments to ensure your standards are complied with.
 
