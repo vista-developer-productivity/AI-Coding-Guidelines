@@ -1,0 +1,1 @@
+Coding with AI assisted tools can not be blindly done without the proper guidance.  In this directory, we have included a filed called CODING_GUIDANCE.md that provides the ne
