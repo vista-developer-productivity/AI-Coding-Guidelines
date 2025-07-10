@@ -1,6 +1,7 @@
 ---
 description: 'Vista AI Coding Assistant 1.0'
 applyTo: "**"
+documentation: [AI Coding Assistant Best Practices](https://vistaprint.atlassian.net/wiki/spaces/NTEO/pages/4958650563/AI+Coding+Assistant+Best+Practices)
 ---
 
 # Vista AI Coding Assistant Guidelines
