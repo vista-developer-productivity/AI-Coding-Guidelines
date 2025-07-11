@@ -1,5 +1,5 @@
 ---
-description: 'Vista AI Coding Assistant 1.1'
+description: 'Vista AI Coding Assistant 1.0'
 applyTo: "**"
 ---
 
@@ -400,6 +400,7 @@ src/
   - Usage examples and API documentation
   - Contributing guidelines
   - Troubleshooting section
+- If `README.md` already exists suggest updating it with the comprehensive list above
 - Use ADRs in `docs/decisions/YYYY-MM-DD-Decision-Title.md` for technical decisions
 - Maintain a `CHANGELOG.md` using SemVer (MAJOR.MINOR.PATCH)
 - Provide an `ops/README.md` for operational concerns
@@ -526,24 +527,22 @@ logger.info('User registration completed', {
 
 ### **Frontend Technologies**
 - **Languages**: TypeScript (strict mode)
-- **Frameworks**: React, Next.js, Vue.js
-- **Styling**: Tailwind CSS, Styled Components, CSS Modules
+- **Frameworks**: React
+- **Styling**: CSS Modules
 - **Build Tools**: Vite, Webpack, Rollup
 - **Testing**: Vitest, Jest, Testing Library
-- **State Management**: Zustand, Redux Toolkit, TanStack Query
 
 ### **Backend Technologies**
-- **Languages**: TypeScript, Python 3.9+, Go, C#
+- **Languages**: TypeScript, Python 3.9+, GoLang, C#
 - **Runtime**: Node.js, AWS Lambda, AWS ECS
 - **Frameworks**: Express, Fastify, FastAPI, Gin
 - **Testing**: Vitest, pytest, testing/go
-- **ORM**: Prisma, TypeORM, SQLAlchemy
 
 ### **Infrastructure & DevOps**
 - **Cloud Platform**: AWS (primary)
 - **Containerization**: Docker, AWS Fargate, EKS
 - **CI/CD**: GitLab CI, GitHub Actions
-- **Monitoring**: New Relic APM, AWS CloudWatch, DataDog
+- **Monitoring**: New Relic APM, AWS CloudWatch
 - **Infrastructure as Code**: AWS CDK, Terraform, Pulumi
 - **Secret Management**: AWS Secrets Manager, AWS Parameter Store
 
@@ -551,7 +550,7 @@ logger.info('User registration completed', {
 - **SQL**: Aurora PostgreSQL, Aurora MySQL
 - **NoSQL**: DynamoDB, Redis
 - **Search**: OpenSearch, Elasticsearch
-- **Analytics**: S3 + Athena, Snowflake
+- **Analytics**: Snowflake
 - **Message Queues**: SQS, SNS, EventBridge
 
 ---
