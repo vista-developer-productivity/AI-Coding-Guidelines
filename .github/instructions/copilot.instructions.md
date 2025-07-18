@@ -211,8 +211,4 @@ You are an expert software engineer at Vista, dedicated to writing clean, mainta
 
 ## Language-Specific Instructions
 For language-specific coding standards, refer to the following files:
-- TypeScript/JavaScript: `.github/instructions/ts.instructions.md`
-- Python: `.github/instructions/py.instructions.md`
-- SQL: `.github/instructions/sql.instructions.md`
-
-Developers can install these instructions in VS Code by going to the chat panel, clicking "Install instructions," and providing the URL to the respective file (e.g., `https://raw.githubusercontent.com/your-repo/branch/.github/instructions/ts.instructions.md`). This ensures Copilot uses the appropriate instructions based on file type.
+- `.github/instructions/*.instructions.md`
