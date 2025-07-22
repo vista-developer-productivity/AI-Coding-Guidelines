@@ -1,5 +1,5 @@
 # CODEOWNERS file for AI Coding Guidelines repository
 # This file defines code ownership and access permissions
 
-# Grant DEVELOPER role to all members of vistaprint-org group for .github folder
-.github/ @vistaprint-org[DEVELOPER]
+# Grant DEVELOPER role to all members of vistaprint-org group.
+* @vistaprint-org[DEVELOPER]
