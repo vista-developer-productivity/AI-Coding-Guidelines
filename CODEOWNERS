@@ -1,5 +1,3 @@
-# CODEOWNERS file for AI Coding Guidelines repository
-# This file defines code ownership and access permissions
-
-# Grant DEVELOPER role to all members of vistaprint-org group.
-* @vistaprint-org[DEVELOPER]
+# See: <https://docs.gitlab.com/ee/user/project/code_owners.html>
+# Default match using wildcards
+* @vistaprint-org/vista-engineering/engineering-productivity/developer-productivity
