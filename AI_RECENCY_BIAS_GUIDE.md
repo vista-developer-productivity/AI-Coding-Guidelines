@@ -17,7 +17,7 @@ Recency bias is a fundamental architectural limitation of Large Language Models 
 
 ## Why This Matters for Engineers
 
-As you work with AI coding agents, you'll encounter these symptoms daily:
+As you work with AI coding agents, you'll likely encounter these symptoms:
 
 * **Instruction Forgetting**: AI "forgets" critical requirements given earlier in the conversation
 * **Inconsistent Responses**: Different results when the same information is presented in different orders  
@@ -38,38 +38,28 @@ Research shows that certain components within the neural network (FFN vectors an
 ## How Engineers Experience This
 
 ### Prompt Brittleness
-```
-// Early in conversation: "Always use camelCase for variables"
-// Later: AI sees an example with snake_case
-// Result: AI switches to snake_case, ignoring earlier instruction
-```
+**Early in conversation:** "Always use camelCase for variables"  
+**Later:** AI sees an example with snake_case  
+**Result:** AI switches to snake_case, ignoring earlier instruction
 
 ### Position-Dependent Responses
-```
-// Scenario A: Present Option 1, then Option 2
-// AI chooses Option 2
-
-// Scenario B: Present Option 2, then Option 1  
-// AI chooses Option 1 (same options, different order)
-```
+**Scenario A:** Present Option 1, then Option 2 → AI chooses Option 2  
+**Scenario B:** Present Option 2, then Option 1 → AI chooses Option 1  
+**Result:** Same options, different order, different choice
 
 ### Context Window Memory Loss
-```
-// Early: "This is a React TypeScript project with strict typing"
-// After 50 exchanges: AI suggests vanilla JavaScript solutions
-// Root cause: Original context has minimal influence
-```
+**Early:** "This is a React TypeScript project with strict typing"  
+**After 50 exchanges:** AI suggests vanilla JavaScript solutions  
+**Root cause:** Original context has minimal influence
 
 ### Priority Inversion During Problem-Solving
-```
-// Code review conversation identifies:
-// 1. Major architectural issue (discussed early)
-// 2. Minor styling inconsistencies (discussed recently)
+**Code review identifies:**
+1. Major architectural issue (discussed early)
+2. Minor styling inconsistencies (discussed recently)
 
-// Expected: Focus shifts to the major architectural issue
-// Reality: AI prioritizes the minor styling issues because they're more recent
-// Risk: Major architectural problems get forgotten while minor fixes create false completion
-```
+**Expected:** Focus shifts to the major architectural issue  
+**Reality:** AI prioritizes the minor styling issues because they're more recent  
+**Risk:** Major architectural problems get forgotten while minor fixes create false completion
 
 **Why this is dangerous**: AI's eagerness to please can cause critical issues to be forgotten entirely. When the AI shifts focus to recently completed minor tasks, it may never return to the major problem, leading to:
 - **Critical issues left unresolved**: Major architectural problems get forgotten while minor fixes create a false sense of completion
@@ -86,18 +76,18 @@ As established earlier, persistent documentation in code artifacts is your most 
 ### 2. Conversational Techniques for Bias Detection and Correction
 Use these approaches when you notice context slipping despite file-based documentation:
 
-**"Pause, Think, Assess, Report Back"**: Interrupts automatic responses and forces deliberate context retrieval when you suspect bias
-**Explicit Confirmation**: Requires AI to actively recall earlier constraints when inconsistencies appear  
-**One Change at a Time**: Prevents bias from compounding when context is degrading
+- **"Pause, Think, Assess, Report Back"**: Interrupts automatic responses and forces deliberate context retrieval when you suspect bias
+- **Explicit Confirmation**: Gives the engineer time to see if a mistake was made based on missing context
+- **One Change at a Time**: Prevents bias from compounding when context is degrading
 
 **When to use**: These are diagnostic and corrective tools, not primary prevention strategies.
 
 ### 3. Strategic Session Design
 Engineer conversations to work with bias rather than fight it constantly:
 
-**End-weight critical information**: Place key constraints at the end of prompts to leverage recency bias positively
-**Create decision checkpoints**: Every 25-30 exchanges, reference file-based documentation to reset context
-**Document as you go**: Capture architectural decisions in files immediately, not at session end
+- **End-weight critical information**: Place key constraints at the end of prompts to leverage recency bias positively
+- **Create decision checkpoints**: Every 25-30 exchanges, reference file-based documentation to reset context
+- **Document as you go**: Capture architectural decisions in files immediately, not at session end
 
 ## Recognizing Recency Bias in Action
 
@@ -125,9 +115,9 @@ Engineer conversations to work with bias rather than fight it constantly:
 ### Understanding Why Coaching Guidelines Work
 The tactical approaches in the coaching guidelines are effective because they address specific bias mechanisms:
 
-**Database-First Verification**: Schemas represent persistent truth that counters bias toward recent, potentially incorrect assumptions
-**Explicit Problem Isolation**: Forcing AI to identify the specific failing component interrupts the tendency to make broad assumptions based on recent context—it must focus on concrete evidence rather than recent impressions
-**Centralized Component Reuse**: Documented patterns provide stable reference points that resist bias-driven drift
+- **Database-First Verification**: Schemas represent persistent truth that counters bias toward recent, potentially incorrect assumptions
+- **Explicit Problem Isolation**: Forcing AI to identify the specific failing component interrupts the tendency to make broad assumptions based on recent context—it must focus on concrete evidence rather than recent impressions
+- **Centralized Component Reuse**: Documented patterns provide stable reference points that resist bias-driven drift
 
 ### When Conversational Techniques Become Necessary
 Use the coaching guidelines' conversational approaches when file-based documentation isn't sufficient:
