@@ -1,10 +1,19 @@
 # Understanding AI Recency Bias: A Technical Guide for Engineers
 
+Every engineer working with AI coding assistants has experienced this: you start with clear requirements, but as the conversation progresses, the AI begins suggesting solutions that ignore your original constraints or architectural decisions. This isn't randomness or poor training. It's recency bias, a fundamental limitation of how Large Language Models process and weight information. Understanding this bias and learning to work with it effectively is crucial for maintaining code quality and engineering standards in AI-assisted development.
+
 ## What Is Recency Bias in AI?
 
 Recency bias is a fundamental architectural limitation of Large Language Models (LLMs) where the AI disproportionately favors information that appears later in prompts, conversations, or context windows. This isn't a bug—it's an inherent characteristic of how attention mechanisms and context processing work in transformer-based models.
 
-**Key Research Reference**: Zhou et al., "UniBias: Unveiling and Mitigating LLM Bias through Internal Attention and FFN Manipulation" (2024) - https://arxiv.org/html/2405.20612v1
+## The File-First Defense Strategy
+
+**The most effective defense against recency bias is to capture critical context in persistent code artifacts rather than relying on conversational memory.** This strategy works because files force the AI to re-encounter your constraints and decisions every time it processes your code, bypassing the conversation-length limitations that cause bias.
+
+**Implementation approaches:**
+- **Immutable Headers**: Embed constraints directly in files where AI will encounter them repeatedly
+- **Comment Breadcrumbs**: Document architectural decisions and reasoning chains within the code itself  
+- **Centralized Documentation**: Create reference files (schemas, standards, patterns) that persist across sessions
 
 ## Why This Matters for Engineers
 
@@ -71,14 +80,8 @@ Research shows that certain components within the neural network (FFN vectors an
 
 ## Practical Mitigation Strategies
 
-### 1. Files as Your Primary Defense Against Recency Bias
-The most effective strategy is to **capture critical context in code artifacts** rather than relying on conversational memory:
-
-**Immutable Headers**: Embed constraints directly in files where AI will encounter them repeatedly
-**Comment Breadcrumbs**: Document architectural decisions and reasoning chains within the code itself  
-**Centralized Documentation**: Create reference files (schemas, standards, patterns) that persist across sessions
-
-**Why this works**: Files force AI to re-read critical context every time, bypassing the conversation-length limitations that cause bias.
+### 1. Implement the File-First Strategy
+As established earlier, persistent documentation in code artifacts is your most reliable defense. When conversational techniques fail, return to strengthening your file-based context.
 
 ### 2. Conversational Techniques for Bias Detection and Correction
 Use these approaches when you notice context slipping despite file-based documentation:
@@ -162,4 +165,12 @@ Understanding recency bias helps you recognize when the coaching guidelines' tec
 
 **The Reset Decision**: When bias overwhelms even structured coaching approaches, starting fresh with a clear problem statement and key constraints often restores effectiveness more efficiently than continued remediation.
 
+## Conclusion
+
+The file-first defense strategy remains your most reliable approach to managing recency bias in AI-assisted development. By embedding critical context directly in your code artifacts—through immutable headers, comment breadcrumbs, and centralized documentation—you create persistent reference points that resist conversational degradation. When conversational techniques become necessary, use them as diagnostic and corrective tools rather than primary strategies.
+
 Remember: The [Coding Guidelines](CODING_GUIDELINES.md) provide the tactical framework for managing AI behavior. Understanding recency bias helps you recognize when these tactics are most needed and why they work, making you a more effective AI coach in your development projects.
+
+## Research Reference
+
+**Key Research Reference**: Zhou et al., "UniBias: Unveiling and Mitigating LLM Bias through Internal Attention and FFN Manipulation" (2024) - https://arxiv.org/html/2405.20612v1
