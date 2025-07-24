@@ -51,6 +51,24 @@ Research shows that certain components within the neural network (FFN vectors an
 // Root cause: Original context has minimal influence
 ```
 
+### Priority Inversion During Problem-Solving
+```
+// Code review conversation identifies:
+// 1. Major architectural issue (discussed early)
+// 2. Minor styling inconsistencies (discussed recently)
+
+// Expected: Focus shifts to the major architectural issue
+// Reality: AI prioritizes the minor styling issues because they're more recent
+// Risk: Major architectural problems get forgotten while minor fixes create false completion
+```
+
+**Why this is dangerous**: AI's eagerness to please can cause critical issues to be forgotten entirely. When the AI shifts focus to recently completed minor tasks, it may never return to the major problem, leading to:
+- **Critical issues left unresolved**: Major architectural problems get forgotten while minor fixes create a false sense of completion
+- **Incomplete problem resolution**: The session ends with easy tasks done but core issues still present in the codebase
+- **Silent failures**: No explicit acknowledgment that important work remains undone
+
+**Immediate mitigation**: When discussing multiple issues, explicitly restate priority order after addressing any individual item: "Now let's return to the primary concern: the architectural issue we identified first."
+
 ## Practical Mitigation Strategies
 
 ### 1. Files as Your Primary Defense Against Recency Bias
@@ -87,6 +105,7 @@ Engineer conversations to work with bias rather than fight it constantly:
 - Gradual drift away from original constraints or coding standards  
 - Over-reliance on the most recent examples rather than project patterns
 - AI discussing "possible approaches" instead of referencing established implementations
+- **Priority inversion**: AI focuses on recent, minor issues while ignoring earlier, major problems
 
 **Your Response**: Reference file-based documentation or use "pause, think, assess" to reset context before proceeding.
 
