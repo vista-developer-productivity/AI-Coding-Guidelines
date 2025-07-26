@@ -150,6 +150,10 @@ To be an effective AI coach, employ these specific practices:
 * Offer simpler design suggestions. While the AI might suggest a complex solution initially, it will find and master the simple solution if given some hints and encouragement to get there.  
 * Ensure obvious solutions are checked first.
 
+**Understanding AI's Architectural Limitations**
+
+* **Recency Bias**: AI agents have inherent architectural biases that affect their reliability and consistency. Understanding these limitations helps explain many coaching challenges and provides strategies for more effective collaboration. See [AI Recency Bias Guide](AI_RECENCY_BIAS_GUIDE.md) for technical background and practical mitigation strategies.
+
 **Require Concrete Evidence Before Changes**
 
 * Insist the AI presents explicit evidence (logs, actual failures) before code changes.  
