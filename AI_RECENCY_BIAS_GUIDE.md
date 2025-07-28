@@ -70,7 +70,9 @@ Research shows that certain components within the neural network (FFN vectors an
 
 ### Documentation Pattern Reinforcement
 **The Pattern**: Documentation that shows correct examples followed by complete "bad" examples to avoid
+
 **The Experience**: AI generates code following the "bad" patterns despite explicit "avoid" labels
+
 **Root Cause**: AI attention mechanisms weight later examples more heavily, reinforcing unwanted patterns even when marked as incorrect
 
 ```markdown
@@ -86,30 +88,13 @@ const user_name = "john";  // ← This complete example may be reinforced
 **Common manifestations**:
 - AI copies deprecated API patterns shown as "don't do this" examples
 - Style guides with "bad" examples lead to inconsistent code generation
-- Architecture documentation showing "old way vs new way" results in AI using the old way
 
 ## Practical Mitigation Strategies
 
 ### 1. Implement the File-First Strategy
 As established earlier, persistent documentation in code artifacts is your most reliable defense. When conversational techniques fail, return to strengthening your file-based context.
 
-### 2. Conversational Techniques for Bias Detection and Correction
-Use these approaches when you notice context slipping despite file-based documentation:
-
-- **"Pause, Think, Assess, Report Back"**: Interrupts automatic responses and forces deliberate context retrieval when you suspect bias
-- **Explicit Confirmation**: Gives the engineer time to see if a mistake was made based on missing context
-- **One Change at a Time**: Prevents bias from compounding when context is degrading
-
-**When to use**: These are diagnostic and corrective tools, not primary prevention strategies.
-
-### 3. Strategic Session Design
-Engineer conversations to work with bias rather than fight it constantly:
-
-- **End-weight critical information**: Place key constraints at the end of prompts to leverage recency bias positively
-- **Create decision checkpoints**: Every 25-30 exchanges, reference file-based documentation to reset context
-- **Document as you go**: Capture architectural decisions in files immediately, not at session end
-
-### 4. Safe Documentation Structuring
+### 2. Safe Documentation Structuring
 Structure your code documentation and AI instructions to work with recency bias rather than against it:
 
 **Safe Example Approach**: Show complete examples of correct patterns, describe incorrect patterns without demonstrating them
@@ -133,6 +118,22 @@ const userName = "john";
 - **Position critical examples late** in documentation to leverage recency bias positively
 
 This principle applies to all AI-facing documentation: API examples, coding standards, architectural patterns, and inline code comments.
+
+### 3. Conversational Techniques for Bias Detection and Correction
+Use these approaches when you notice context slipping despite file-based documentation:
+
+- **"Pause, Think, Assess, Report Back"**: Interrupts automatic responses and forces deliberate context retrieval when you suspect bias
+- **Explicit Confirmation**: Gives the engineer time to see if a mistake was made based on missing context
+- **One Change at a Time**: Prevents bias from compounding when context is degrading
+
+**When to use**: These are diagnostic and corrective tools, not primary prevention strategies.
+
+### 4. Strategic Session Design
+Engineer conversations to work with bias rather than fight it constantly:
+
+- **End-weight critical information**: Place key constraints at the end of prompts to leverage recency bias positively
+- **Create decision checkpoints**: Every 25-30 exchanges, reference file-based documentation to reset context
+- **Document as you go**: Capture architectural decisions in files immediately, not at session end
 
 ## Recognizing Recency Bias in Action
 
