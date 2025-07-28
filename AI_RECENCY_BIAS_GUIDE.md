@@ -68,6 +68,26 @@ Research shows that certain components within the neural network (FFN vectors an
 
 **Immediate mitigation**: When discussing multiple issues, explicitly restate priority order after addressing any individual item: "Now let's return to the primary concern: the architectural issue we identified first."
 
+### Documentation Pattern Reinforcement
+**The Pattern**: Documentation that shows correct examples followed by complete "bad" examples to avoid
+**The Experience**: AI generates code following the "bad" patterns despite explicit "avoid" labels
+**Root Cause**: AI attention mechanisms weight later examples more heavily, reinforcing unwanted patterns even when marked as incorrect
+
+```markdown
+// Good: Use camelCase for variables
+const userName = "john";
+
+// Avoid: Don't use snake_case  
+const user_name = "john";  // ← This complete example may be reinforced
+```
+
+**Why this happens**: Even with "Avoid" comments, the AI's attention mechanism processes the complete, syntactically valid code pattern. The recency bias means this later example receives higher attention weights than the earlier "good" example.
+
+**Common manifestations**:
+- AI copies deprecated API patterns shown as "don't do this" examples
+- Style guides with "bad" examples lead to inconsistent code generation
+- Architecture documentation showing "old way vs new way" results in AI using the old way
+
 ## Practical Mitigation Strategies
 
 ### 1. Implement the File-First Strategy
@@ -88,6 +108,31 @@ Engineer conversations to work with bias rather than fight it constantly:
 - **End-weight critical information**: Place key constraints at the end of prompts to leverage recency bias positively
 - **Create decision checkpoints**: Every 25-30 exchanges, reference file-based documentation to reset context
 - **Document as you go**: Capture architectural decisions in files immediately, not at session end
+
+### 4. Safe Documentation Structuring
+Structure your code documentation and AI instructions to work with recency bias rather than against it:
+
+**Safe Example Approach**: Show complete examples of correct patterns, describe incorrect patterns without demonstrating them
+
+```markdown
+// Good: Use camelCase for variables
+const userName = "john";
+
+// Avoid: snake_case patterns like user_name, first_name, last_name
+```
+
+**Documentation Anti-Patterns to Avoid**:
+1. **Multi-line "bad" examples**: Complete, runnable code marked as incorrect
+2. **Example-heavy comparisons**: Showing 3+ alternatives where the last one gets disproportionate weight
+3. **Correction chains**: Showing original code, then corrected version (AI may focus on "original")
+
+**Practical Guidelines**:
+- **End with complete good examples** that demonstrate the desired pattern fully
+- **Describe bad patterns** without showing complete, copyable implementations  
+- **Use positive framing** ("prefer X") over negative framing ("avoid Y") when possible
+- **Position critical examples late** in documentation to leverage recency bias positively
+
+This principle applies to all AI-facing documentation: API examples, coding standards, architectural patterns, and inline code comments.
 
 ## Recognizing Recency Bias in Action
 

@@ -5,19 +5,21 @@ applyTo: '**/*.ts, **/*.js", **/*.jsx, **/*.tsx'
 
 # TypeScript and JavaScript Coding Standards
 
-## Formatting and Style
-- **Prettier**: Use Prettier for consistent code formatting
-  - Configure via `.prettierrc` with project-specific rules. 
-  - Run formatting on save and in pre-commit hooks
-  - Ensure consistent indentation, line breaks, and spacing
+## Configuration Precedence
+When project configuration files exist, follow this precedence order:
+1. **Project-specific config files** (`.prettierrc`, `.eslintrc`, `stylelint.config.js`) - Always take precedence
+2. **This document's standards** - Apply when no project config exists or for areas not covered by config files
+3. **IDE/Editor defaults** - Use only as fallback when neither above exist
+
+Project configuration files override this document's formatting and linting rules, but this document's architectural and naming guidance still applies unless explicitly contradicted.
 
 ## Formatting and Style
 - **Prettier**: If it exists, follow the project’s `.prettierrc` for consistent code formatting.
   - Run formatting on save.
   - Ensure consistent indentation, line breaks, and spacing.
-- **ESLint**: If it exists, follow `.eslintrc` for linting, treating warnings as errors.
-  - Key rules: `@typescript-eslint/no-unused-vars`, `no-console`, `eqeqeq`, `curly`.
-- **Stylelint**: Use Stylelint for CSS/SCSS, enforcing accessibility and consistency.
+- **ESLint**: Follow `.eslintrc` if it exists, treating warnings as errors
+  - Key rules: `@typescript-eslint/no-unused-vars`, `no-console`, `eqeqeq`, `curly`
+- **Stylelint**: Use Stylelint for CSS/SCSS, enforcing accessibility and consistency
 
 ### **Code Structure Rules**
 
@@ -52,22 +54,14 @@ const getStatusMessage = (status: Status): string => {
   return 'Unknown status'
 }
 
-// Avoid: Nested ternary expressions
-const getStatusMessage = (status: Status): string => 
-  status === 'active' ? 'User is active' 
-    : status === 'inactive' ? 'User is inactive' 
-    : 'Unknown status'
+// Avoid: nested ternary expressions like status === 'active' ? 'User is active' : status === 'inactive' ? ...
 
 // Good: Immutable operations
 const addUser = (users: User[], newUser: User): User[] => {
   return [...users, newUser]
 }
 
-// Avoid: Mutation
-const addUser = (users: User[], newUser: User): User[] => {
-  users.push(newUser) // Mutates original array
-  return users
-}
+// Avoid: mutation with users.push(newUser) that modifies the original array
 
 // Good: Early return pattern
 const processUser = (user: User): ProcessedUser => {
@@ -147,7 +141,7 @@ import './component.styles.css'
 
 #### **TypeScript Best Practices**
 - **Strict Mode**: Always use TypeScript strict mode
-- **Type Definitions**: Create explicit interfaces for all data structures
+- **Interface Usage**: Create interfaces for reusable, shared data structures; use inline types or type aliases for simple, one-time use cases
 - **Avoid `any`**: Use `unknown` or proper types instead of `any`
 - **Null Safety**: Handle null/undefined cases explicitly
 - **Generic Constraints**: Use proper generic constraints
@@ -155,7 +149,7 @@ import './component.styles.css'
 - **Branded Types**: Use branded types for domain-specific values
 
 ```typescript
-// Good: Explicit interface with proper typing
+// Good: Interface for reusable, complex data structures
 interface UserData {
   readonly id: string
   name: string
@@ -163,6 +157,18 @@ interface UserData {
   createdAt: Date
   preferences?: UserPreferences
 }
+
+// Avoid: interface ButtonProps { text: string; onClick: () => void } for single-use
+// Avoid: interface UserIdWrapper { value: string } that just wraps primitives
+
+// Good: Inline type for simple, single-use function parameters
+function Button(props: { text: string; onClick: () => void }) {
+  return <button onClick={props.onClick}>{props.text}</button>
+}
+
+// Good: Type alias for simple reusable types
+type UserId = string
+type EventHandler = (event: Event) => void
 
 // Good: Proper error handling with types
 const processUser = (userData: UserData): Result<ProcessedUser, ValidationError> => {
@@ -207,9 +213,7 @@ import { format, parseISO } from 'date-fns'
 // Good: Conditional imports for performance
 const HeavyComponent = lazy(() => import('./HeavyComponent'))
 
-// Avoid: Full library imports
-import * as _ from 'lodash'
-import * as dateFns from 'date-fns'
+// Avoid: importing entire libraries like import * as _ from 'lodash'
 ```
 
 ### **Accessibility and Security Linting**
