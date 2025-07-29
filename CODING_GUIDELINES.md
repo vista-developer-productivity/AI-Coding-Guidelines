@@ -80,6 +80,13 @@ Define strict boundaries to guide AI autonomy:
 * **Immutable Elements**: Critical architectural frameworks, security configurations, core integrations.  
 * **Flexible Elements**: UI implementations, business logic refinements, data transformation functions.
 
+**Writing Clear AI Instructions**
+When creating documentation or instructions for AI agents:
+
+* **Replace subjective terms with measurable criteria**: Instead of "keep functions small" specify "aim for functions under 20 lines"
+* **Provide explicit decision trees**: Rather than "use interfaces when appropriate," specify "create interfaces for reusable, complex data structures; use inline types for simple, single-use function parameters"
+* **Establish clear precedence hierarchies**: When multiple guidance sources exist, explicitly state which takes priority (project config files override general guidelines)
+
 **Schema and Database Management**
 
 * Guide the AI to comprehensively define schemas before any logic implementation.  
@@ -115,6 +122,15 @@ Effective testing and debugging are crucial when collaborating with AI agents. H
 **Advanced AI Coaching Techniques**
 
 To be an effective AI coach, employ these specific practices:
+
+**Structure Documentation to Avoid Pattern Pollution**
+
+* Show complete examples of correct patterns only
+* Demonstrate what you want the AI to copy
+* Describe incorrect patterns without showing complete code
+* Avoid "bad example" sections that may be accidentally reinforced
+* Position critical examples at the end of documentation
+* Leverage AI's attention mechanisms by placing key patterns where they'll receive highest weight
 
 **Encourage Reuse and Component Design**
 
