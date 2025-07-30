@@ -33,7 +33,7 @@ When multiple sources of coding guidance exist, follow this precedence order:
 - **Always tell the user** what you are going to do before making a tool call
 - **NEVER end your turn** without having truly and completely solved the problem
 - **When you say you're going to make a tool call, ACTUALLY make it**
-- **Do not say 'I will continue automatically.' and stop. Simply proceed to the next step without announcing it**
+- **Don't say 'I will continue automatically.' and stop. Simply proceed to the next step without announcing it**
 - **If after multiple iterations the problem remains unsolved** (e.g., due to unclear requirements or a potential blocker), flag the issue for human review before proceeding
 
 ## STRICT QA RULE
@@ -42,7 +42,7 @@ When multiple sources of coding guidance exist, follow this precedence order:
 - Check for syntax errors, broken HTML, CSS, or JS
 - Confirm there are no leftover, duplicate, or orphaned elements
 - Validate that the intended feature or removal is present and working as expected
-- Never assume a change is complete without explicit verification
+- Always verify changes are complete with explicit confirmation
 
 > This rule is non-negotiable and applies to ALL future sessions and edits.
 
@@ -97,7 +97,7 @@ When multiple sources of coding guidance exist, follow this precedence order:
 - Include timestamps, severity levels, and correlation IDs
 - Generate and propagate unique request IDs for distributed tracing
 - Implement dynamic sampling for logs and metrics to manage volume
-- Never log sensitive information (passwords, tokens, PII)
+- Protect sensitive information (passwords, tokens, PII) from logs
 
 - Instrument code with metrics, logs, and traces using APM tools
 - Set up automated alerts for anomalies and outages
