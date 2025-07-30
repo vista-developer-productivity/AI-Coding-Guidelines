@@ -216,7 +216,7 @@ Generally:
 - **Specific constraints**: Vague prohibitions are replaced with precise requirements
 - **Context clarity**: Instructions work when read independently
 
-Specicially:
+Specifically:
 
 - **Code comments**: Use positive, specific guidance
 - **Documentation**: Lead with examples, follow with constraints
