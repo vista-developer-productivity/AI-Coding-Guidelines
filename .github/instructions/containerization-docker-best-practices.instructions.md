@@ -12,14 +12,14 @@ As GitHub Copilot, you are an expert in containerization with deep knowledge of 
 ## Core Principles of Containerization
 
 ### **1. Immutability**
-- **Principle:** Once a container image is built, it should not change. Any changes should result in a new image.
+- **Principle:** Once a container image is built, it remains unchanged. Any changes require creating a new image.
 - **Deeper Dive:**
     - **Reproducible Builds:** Every build should produce identical results given the same inputs. This requires deterministic build processes, pinned dependency versions, and controlled build environments.
     - **Version Control for Images:** Treat container images like code - version them, tag them meaningfully, and maintain a clear history of what each image contains.
     - **Rollback Capability:** Immutable images enable instant rollbacks by simply switching to a previous image tag, without the complexity of undoing changes.
     - **Security Benefits:** Immutable images reduce the attack surface by preventing runtime modifications that could introduce vulnerabilities.
 - **Guidance for Copilot:**
-    - Advocate for creating new images for every code change or configuration update, never modifying running containers in production.
+    - Advocate for creating new images for every code change or configuration update, avoiding modifications to running containers in production.
     - Recommend using semantic versioning for image tags (e.g., `v1.2.3`, `latest` for development only).
     - Suggest implementing automated image builds triggered by code changes to ensure consistency.
     - Emphasize the importance of treating container images as artifacts that should be versioned and stored in registries.
@@ -295,7 +295,7 @@ CMD ["node", "dist/main.js"]
     - **Runtime Configuration:** Use environment variables for configuration that varies between environments (databases, API endpoints, feature flags).
     - **Default Values:** Provide sensible defaults with `ENV` but allow overriding at runtime.
     - **Configuration Validation:** Validate required environment variables at startup to fail fast if configuration is missing.
-    - **Security:** Never hardcode secrets in environment variables in the Dockerfile.
+    - **Security:** Keep secrets out of environment variables in the Dockerfile.
 - **Guidance for Copilot:**
     - Avoid hardcoding configuration inside the image. Use `ENV` for default values, but allow overriding at runtime.
     - Recommend using environment variable validation in application startup code.
@@ -437,7 +437,7 @@ RUN setcap -r /usr/bin/node
 ```
 
 ### **6. No Sensitive Data in Image Layers**
-- **Principle:** Never include secrets, private keys, or credentials in image layers as they become part of the image history.
+- **Principle:** Keep secrets, private keys, and credentials out of image layers as they become part of the image history.
 - **Deeper Dive:**
     - **Layer History:** All files added to an image are stored in the image history and can be extracted even if deleted in later layers.
     - **Build Arguments:** While `--build-arg` can pass data during build, avoid passing sensitive information this way.
@@ -542,7 +542,7 @@ const logger = winston.createLogger({
     - **Performance:** Choose storage solutions that meet your performance requirements.
 - **Guidance for Copilot:**
     - Use Docker Volumes or Kubernetes Persistent Volumes for data that needs to persist beyond container lifecycle.
-    - Never store persistent data inside the container's writable layer.
+    - Store persistent data outside the container's writable layer.
     - Recommend implementing backup and disaster recovery procedures for persistent data.
     - Suggest using cloud-native storage solutions for better scalability and reliability.
 - **Example (Docker Volume Usage):**
