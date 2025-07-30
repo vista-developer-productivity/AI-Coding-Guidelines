@@ -86,6 +86,7 @@ When creating documentation or instructions for AI agents:
 * **Replace subjective terms with measurable criteria**: Instead of "keep functions small" specify "aim for functions under 20 lines"
 * **Provide explicit decision trees**: Rather than "use interfaces when appropriate," specify "create interfaces for reusable, complex data structures; use inline types for simple, single-use function parameters"
 * **Establish clear precedence hierarchies**: When multiple guidance sources exist, explicitly state which takes priority (project config files override general guidelines)
+* **Use positive framing and contractions**: Frame instructions as what TO do rather than what NOT to do. When negation is necessary, use contractions ("don't" rather than "do not") for better AI processing. For detailed patterns, see the [Negation and Instruction Clarity Guide](NEGATION_AND_INSTRUCTION_CLARITY_GUIDE.md).
 
 **Schema and Database Management**
 
@@ -131,6 +132,8 @@ To be an effective AI coach, employ these specific practices:
 * Avoid "bad example" sections that may be accidentally reinforced
 * Position critical examples at the end of documentation
 * Leverage AI's attention mechanisms by placing key patterns where they'll receive highest weight
+
+**Related considerations**: This structuring advice works synergistically with negation-friendly instruction design and recency bias mitigation. See the [AI Recency Bias Guide](AI_RECENCY_BIAS_GUIDE.md) and [Negation and Instruction Clarity Guide](NEGATION_AND_INSTRUCTION_CLARITY_GUIDE.md) for comprehensive strategies.
 
 **Encourage Reuse and Component Design**
 

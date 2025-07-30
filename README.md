@@ -14,7 +14,9 @@ For engineers who want to understand *why* certain coaching techniques are neces
 - Understand why file-based documentation is more reliable than conversational instructions
 - Know when to reset a conversation versus continuing with corrective techniques
 
-**Start with CODING_GUIDELINES.md for practical techniques, then read AI_RECENCY_BIAS_GUIDE.md when you need to understand the underlying science.**
+Additionally, **NEGATION_AND_INSTRUCTION_CLARITY_GUIDE.md** covers how to write AI-friendly instructions that are reliably understood and followed. This guide explains how tokenization and attention mechanisms affect negation processing, and provides research-backed patterns for creating clear, actionable guidance that AI systems can consistently interpret.
+
+**Start with CODING_GUIDELINES.md for practical techniques, then read the technical guides when you need to understand the underlying science.**
 
 We encourage all teams to share their templates in this directory for greater knowledge sharing and a more community-driven approach to ensuring our AI assisted tools work in the most effective way possible across the organization. When using VSCode, follow the following links on how to add more specific instructions to your IDE. 
  The default behavior is a file in `.github/copilot-instructions.md` 

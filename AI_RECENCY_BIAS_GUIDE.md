@@ -99,6 +99,12 @@ Structure your code documentation and AI instructions to work with recency bias 
 
 **Safe Example Approach**: Show complete examples of correct patterns, describe incorrect patterns without demonstrating them
 
+**Negation and Recency Bias Interaction**: Recency bias makes negation-based instructions particularly vulnerable. When you use separated negations like "do not use X" early in a conversation, the AI may lose track of the "not" as context grows, effectively seeing "use X" as the most recent guidance. This compounds the normal attention weight issues.
+
+**Practical solution**: Use positive framing and contractions consistently. Instead of "Do not use global variables" early in a session, use "Use dependency injection and local scope" or "Don't use global variables" if negation is necessary. See the [Negation and Instruction Clarity Guide](NEGATION_AND_INSTRUCTION_CLARITY_GUIDE.md) for comprehensive patterns.
+
+**Structure Documentation to Avoid Pattern Pollution**
+
 ```markdown
 // Good: Use camelCase for variables
 const userName = "john";
@@ -131,7 +137,7 @@ Use these approaches when you notice context slipping despite file-based documen
 ### 4. Strategic Session Design
 Engineer conversations to work with bias rather than fight it constantly:
 
-- **End-weight critical information**: Place key constraints at the end of prompts to leverage recency bias positively
+- **End-weight critical information**: Place key constraints at the end of prompts to leverage recency bias positively. This is especially important for negative constraints—if you must use "don't" or "avoid," place these instructions late in the conversation where they'll receive higher attention weights.
 - **Create decision checkpoints**: Every 25-30 exchanges, reference file-based documentation to reset context
 - **Document as you go**: Capture architectural decisions in files immediately, not at session end
 
