@@ -3,7 +3,7 @@ description: 'Vista AI Coding Assistant 1.0'
 applyTo: "**"
 ---
 
-# Vista AI Coding Assistant
+# Vista AI Coding Assistant [v1.0]
 
 **Note**: This file contains general guidelines for all code in the repository.
 
@@ -47,6 +47,20 @@ When multiple sources of coding guidance exist, follow this precedence order:
 > This rule is non-negotiable and applies to ALL future sessions and edits.
 
 ## Development Standards
+
+### Vista Engineering Principles
+- **Put usability and reliability first, even if it means delaying new features.**
+- We aim to craft software customers love, so we put usability and reliability first, even if it means delaying new features. As engineers, we are in a pivotal position to shape the user experience. While we don’t need to be perfectionists, we do want to be proud of what we build.
+- **Leave things better than you found them.**
+- We are committed to continuous improvement, so we strive to go beyond the immediate task at hand and proactively monitor the health and quality of our codebase. We keep the things we use clean (the campground rule) – our code, data, repos, configurations, documentation, cloud resources, etc. – to ensure a productive work environment. We deliberately put time into reducing tech debt, learning new approaches, and improving our engineering processes. While this may slightly slow us down today, it will make us faster in the long run.
+- **Unblock progress by crossing team boundaries and letting others cross yours.**
+- Sometimes, getting things done requires work in systems beyond your own team. Don’t be afraid to cross team boundaries and contribute to other teams’ systems. If you are blocked by the unfinished work of another team, don’t complain; don’t build around them; instead be constructive and actively collaborate to help them!
+- **Treat our data systems like any other production system.**
+- No matter what type of data or the systems that create or manage it, we should treat it with a high level of respect, like any other production system. Data is only useful if it’s both tracked, and it’s reliable. To get both of these we need to make sure we are tracking relevant data on everything we build, and that we’re building the systems that process it in a reliable way so that it can be used as a trustworthy dependency for making decisions and as input to other systems. We build production data assets and systems with the same level of diligence, investment, and maturity that we do our software production systems, and use best practices and paved paths to ensure a high level of reliability to enable trust.
+- **You build it, you run it.**
+- As product teams, we are responsible to build and operate our products. We have significant autonomy on how we build these products, and this freedom comes with accountability. As we operate our own products, we are obligated to build services that are intrinsically reliable and can be operated with an appropriate level of effort. We show the same level of care to products and systems where ownership is given to us as if we had built them ourselves.
+- **Keep work simple, ship it often.**
+- We optimize our code and architecture for simplicity, free from unnecessary abstractions and complexities. Keeping things simple makes them easier to understand, which makes it easier to maintain our code and systems. By shipping simple work often, we incrementally provide value and expose it to real use cases quickly.
 
 ### Testing Standards
 - Write unit tests for all functions and classes, covering critical paths and edge cases

@@ -3,7 +3,7 @@ applyTo: '**/Dockerfile, **/docker-compose.yml, **/*.dockerfile'
 description: 'Comprehensive best practices for creating optimized, secure, and efficient Docker images and managing containers. Covers multi-stage builds, image layer optimization, security scanning, and runtime best practices.'
 ---
 
-# Containerization & Docker Best Practices
+# Containerization & Docker Best Practices [v1.0]
 
 ## Your Mission
 

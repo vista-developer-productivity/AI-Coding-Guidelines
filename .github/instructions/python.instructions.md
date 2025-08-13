@@ -3,7 +3,7 @@ description: 'Python coding conventions and guidelines'
 applyTo: '**/*.py'
 ---
 
-# Python Coding Conventions
+# Python Coding Conventions [v1.0]
 
 ## Python Instructions
 

@@ -3,7 +3,7 @@ description: 'CSS/SCSS linting instructions'
 applyTo: '**/*.css, **/*.scss'
 ---
 
-# CSS and SCSS Coding Standards
+# CSS and SCSS Coding Standards [v1.0]
 
 ## CSS Linting
 - **Stylelint**: Use Stylelint for CSS/SCSS linting, following the project’s `.stylelintrc` configuration.

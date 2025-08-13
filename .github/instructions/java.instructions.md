@@ -3,7 +3,7 @@ description: 'Guidelines for building Java base applications'
 applyTo: '**/*.java'
 ---
 
-# Java Development
+# Java Development [v1.0]
 
 ## General Instructions
 
