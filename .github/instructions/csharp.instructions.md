@@ -3,7 +3,7 @@ description: 'C# and .NET coding conventions and best practices'
 applyTo: '**/*.cs, **/*.csproj, **/*.sln, **/appsettings*.json'
 ---
 
-# C# and .NET Development Instructions
+# C# and .NET Development Instructions [v1.0]
 
 Follow modern C# idioms and .NET best practices. Based on [Microsoft's C# Coding Conventions](https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions) and [.NET Design Guidelines](https://docs.microsoft.com/en-us/dotnet/standard/design-guidelines/).
 

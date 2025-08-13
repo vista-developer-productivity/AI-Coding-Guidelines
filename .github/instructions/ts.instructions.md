@@ -3,7 +3,7 @@ description: 'Documentation and content creation standards'
 applyTo: '**/*.ts, **/*.js", **/*.jsx, **/*.tsx'
 ---
 
-# TypeScript and JavaScript Coding Standards
+# TypeScript and JavaScript Coding Standards [v1.0]
 
 ## Configuration Precedence
 When project configuration files exist, follow this precedence order:
