@@ -3,7 +3,7 @@ description: 'dbt development guidelines for building and maintaining dbt projec
 applyTo: 'dbt/**, **.dbt_project.yml'
 ---
 
-# dbt Development Guidelines
+# dbt Development Guidelines [v1.0]
 
 This guide outlines general best practices for dbt development. Teams have autonomy to adapt these guidelines to their specific needs and conventions.
 
