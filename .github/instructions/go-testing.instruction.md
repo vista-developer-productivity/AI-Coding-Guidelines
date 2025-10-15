@@ -201,7 +201,57 @@ func TestWithCleanup(t *testing.T) {
 }
 ```
 
-### HTTP Handler Test
+### Benchmark Example
+
+```go
+func BenchmarkMyFunc(b *testing.B) {
+    // Setup (not included in timing)
+    input := setupBenchmarkInput()
+
+    b.ReportAllocs()
+    b.ResetTimer()
+
+    for i := 0; i < b.N; i++ {
+        _ = MyFunc(input)
+    }
+}
+```
+
+### Fuzz Test Example
+
+```go
+func FuzzParse(f *testing.F) {
+    // Seed corpus
+    f.Add([]byte("valid input"))
+    f.Add([]byte(""))
+    f.Add([]byte("edge case"))
+
+    f.Fuzz(func(t *testing.T, data []byte) {
+        // Function should not panic
+        result, err := Parse(data)
+
+        // If no error, result should be valid
+        if err == nil {
+            assert.NotNil(t, result)
+        }
+    })
+}
+```
+
+## Testing HTTP Handlers (Unit Tests)
+
+### HTTP Handler Unit Testing
+
+**Note:** This section covers **unit testing** of HTTP handlers using `httptest`, not integration testing. These tests run entirely in-memory without starting real servers or making network calls. They are safe to run in any environment and do not interact with external services.
+
+HTTP handlers can be unit tested without starting a real server or making network calls. Use `net/http/httptest` to test handlers in isolation:
+
+- `httptest.NewRequest` creates an HTTP request for testing
+- `httptest.ResponseRecorder` captures the handler's response
+- These are **unit tests** that run in-memory with no external dependencies
+- They are safe, fast, and deterministic
+
+### HTTP Handler Test Example
 
 ```go
 func TestHTTPHandler(t *testing.T) {
@@ -245,43 +295,6 @@ func TestHTTPHandler(t *testing.T) {
             }
         })
     }
-}
-```
-
-### Benchmark Example
-
-```go
-func BenchmarkMyFunc(b *testing.B) {
-    // Setup (not included in timing)
-    input := setupBenchmarkInput()
-
-    b.ReportAllocs()
-    b.ResetTimer()
-
-    for i := 0; i < b.N; i++ {
-        _ = MyFunc(input)
-    }
-}
-```
-
-### Fuzz Test Example
-
-```go
-func FuzzParse(f *testing.F) {
-    // Seed corpus
-    f.Add([]byte("valid input"))
-    f.Add([]byte(""))
-    f.Add([]byte("edge case"))
-
-    f.Fuzz(func(t *testing.T, data []byte) {
-        // Function should not panic
-        result, err := Parse(data)
-
-        // If no error, result should be valid
-        if err == nil {
-            assert.NotNil(t, result)
-        }
-    })
 }
 ```
 
