@@ -83,10 +83,6 @@ When writing or generating tests, include:
 - **Assertions using `assert` and `require`** from testify instead of manual error checking
 - Use of `assert.ErrorIs` / `require.ErrorIs` when verifying specific error types
 - Minimal mocking/stubbing: prefer simple custom fakes instead of heavy mock libraries unless a specific interface is complex
-- Benchmark functions (`BenchmarkXxx`) when performance measurement is relevant:
-  - Include `b.ReportAllocs()` to track allocations
-  - Use `b.ResetTimer()` after setup code
-- Fuzz tests (`FuzzXxx`) when input types are suitable (strings, []byte, ints)
 - For outputs with potentially large content (JSON, text, etc.), compare against golden files stored under `testdata/`
 - HTTP handler or client code tests using `net/http/httptest` (NewRequest, ResponseRecorder)
 - Tests that avoid global shared mutable state; if used, reset or isolate state between tests
@@ -98,7 +94,7 @@ Do not generate or write:
 - Using `t.Fatalf`, `t.Errorf`, or manual error checking when `assert`/`require` would be clearer
 - Overly complex or deeply layered test frameworks unless project convention requires it
 - Blind use of reflection, `unsafe`, or meta-programming in test code
-- Tests that rely on external services (database, network) without clearly marking them as integration tests
+- Tests that rely on external services (database, network, etc.) — focus on unit tests only
 - Silent swallowing of errors — all unexpected error conditions should cause test failure with clear message
 - Implicit or hidden setup logic — tests should declare their dependencies clearly
 - Global state that is mutated across tests without resetting it
@@ -201,43 +197,6 @@ func TestWithCleanup(t *testing.T) {
 }
 ```
 
-### Benchmark Example
-
-```go
-func BenchmarkMyFunc(b *testing.B) {
-    // Setup (not included in timing)
-    input := setupBenchmarkInput()
-
-    b.ReportAllocs()
-    b.ResetTimer()
-
-    for i := 0; i < b.N; i++ {
-        _ = MyFunc(input)
-    }
-}
-```
-
-### Fuzz Test Example
-
-```go
-func FuzzParse(f *testing.F) {
-    // Seed corpus
-    f.Add([]byte("valid input"))
-    f.Add([]byte(""))
-    f.Add([]byte("edge case"))
-
-    f.Fuzz(func(t *testing.T, data []byte) {
-        // Function should not panic
-        result, err := Parse(data)
-
-        // If no error, result should be valid
-        if err == nil {
-            assert.NotNil(t, result)
-        }
-    })
-}
-```
-
 ## Testing HTTP Handlers (Unit Tests)
 
 ### HTTP Handler Unit Testing
@@ -298,15 +257,13 @@ func TestHTTPHandler(t *testing.T) {
 }
 ```
 
-## Integration and External Dependencies
+## Testing Policy and Mocking Guidelines
 
-### Testing with External Services
+### Current Testing Policy
 
-- Clearly mark integration tests with build tags: `//go:build integration`
-- Use environment variables or flags to enable/disable integration tests
-- Provide setup instructions for running integration tests in documentation
-- Consider using Docker containers for consistent test environments
-- Use test databases or test instances, never production resources
+- **Focus exclusively on unit tests** — fast, deterministic, and isolated tests
+- **Do not add integration tests** that depend on external services (databases, APIs, networks, etc.)
+- If an integration scenario feels essential, coordinate with maintainers before proceeding so we can revisit the policy and document the required setup
 
 ### Mocking Guidelines
 
@@ -323,27 +280,41 @@ func TestHTTPHandler(t *testing.T) {
 - Use for testing complex output formats (JSON, XML, HTML, etc.)
 - Store expected outputs in `testdata/` directory
 - Name files descriptively: `testdata/TestName_casename.golden.json`
+- Golden files should be committed to version control as test fixtures
 
 ### Golden File Pattern
 
+**Note:** Golden files are version-controlled test fixtures representing expected output. The pattern below shows how to regenerate them during test development or when expected output legitimately changes:
+
 ```go
+// Define a package-level flag for updating golden files during test development
+var updateGolden = flag.Bool("update", false, "update golden test files")
+
 func TestGenerateOutput(t *testing.T) {
     result := GenerateOutput(input)
 
     goldenFile := filepath.Join("testdata", "expected_output.golden.json")
 
-    if *update {
-        // Update golden file with -update flag
+    // Use -update flag during development to regenerate golden files
+    // Example: go test -update
+    if *updateGolden {
         err := os.WriteFile(goldenFile, result, 0644)
         require.NoError(t, err)
+        t.Log("Updated golden file:", goldenFile)
     }
 
     expected, err := os.ReadFile(goldenFile)
     require.NoError(t, err)
 
+    // Compare actual output against golden file
     assert.JSONEq(t, string(expected), string(result))
 }
 ```
+
+**Usage:**
+- Normal test runs: `go test` — compares output against committed golden files
+- Update golden files: `go test -update` — regenerates golden files when expected output changes
+- Always review golden file changes before committing to ensure they represent intentional updates
 
 ## Common Testing Patterns
 
