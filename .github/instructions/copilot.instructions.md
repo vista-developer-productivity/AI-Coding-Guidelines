@@ -1,5 +1,5 @@
 ---
-description: 'Vista AI Coding Assistant 1.0'
+description: 'Vista AI Coding Assistant 1.1'
 applyTo: "**"
 ---
 
