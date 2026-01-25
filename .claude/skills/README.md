@@ -4,9 +4,12 @@ This directory contains Claude Skills - specialized knowledge packs that provide
 
 ## Available Skills
 
-| Skill                               | Command       | Use For                                                              |
-| ----------------------------------- | ------------- | -------------------------------------------------------------------- |
-| [IaC Expert](./iac-expert/SKILL.md) | `/iac-expert` | Terraform, AWS CDK, CloudFormation, Pulumi, Docker, containerization |
+| Skill                                         | Use For                                                                       |
+| --------------------------------------------- | ----------------------------------------------------------------------------- |
+| [Frontend Expert](./frontend-expert/SKILL.md) | React, TypeScript, Next.js, UI components, CSS, performance, accessibility    |
+| [Go Expert](./go-expert/SKILL.md)             | Go development, concurrency, testing, HTTP handlers, idiomatic Go patterns    |
+| [IaC Expert](./iac-expert/SKILL.md)           | Terraform, AWS CDK, CloudFormation, Pulumi, Docker, Kubernetes, DevOps        |
+| [Python Expert](./python-expert/SKILL.md)     | Python development, type hints, pytest, async, OOP, decorators, best practices |
 
 ## Directory Structure
 
@@ -15,76 +18,107 @@ Each skill is stored in a folder with a `SKILL.md` file containing frontmatter m
 ```
 .claude/
 └── skills/
-    ├── README.md              # This file
-    └── iac-expert/
-        └── SKILL.md           # IaC & containerization expertise
+    ├── README.md                 # This file
+    ├── frontend-expert/
+    │   └── SKILL.md             # React & frontend expertise
+    ├── go-expert/
+    │   └── SKILL.md             # Go development expertise
+    ├── iac-expert/
+    │   └── SKILL.md             # IaC & containerization expertise
+    └── python-expert/
+        └── SKILL.md             # Python development expertise
 ```
 
 ## How to Use Skills
 
-### In VS Code with GitHub Copilot
+### Automatic Skill Invocation
 
-1. **Enable Claude Skills**: In VS Code settings, search for "skills" and enable "Claude skills for chat"
-2. **Invoke a Skill**: Type the skill command followed by your question:
+Skills are automatically loaded when relevant to your task based on their descriptions. Simply work with code or ask questions, and the appropriate skill will be invoked:
+
+- Working with React components → `frontend-expert` loads automatically
+- Writing Go tests → `go-expert` loads automatically
+- Building Docker images → `iac-expert` loads automatically
+- Writing Python type hints → `python-expert` loads automatically
+
+### Manual Skill Invocation
+
+You can also explicitly request a skill in your prompts:
 
 ```
-/iac-expert
-Review this Terraform configuration for best practices
+Using the python-expert skill, help me implement async/await patterns
 ```
 
 ```
-/security-expert
-Review this authentication flow for vulnerabilities
+Invoke go-expert to review this HTTP handler for best practices
+```
+
+```
+Use frontend-expert to optimize this React component for performance
 ```
 
 ### Skill Selection Guide
 
-| If you need help with...                                   | Use this skill |
-| ---------------------------------------------------------- | -------------- |
-| Cloud infrastructure code (Terraform, CDK, CloudFormation) | `/iac-expert`  |
-| Docker, containers, Kubernetes, orchestration              | `/iac-expert`  |
-
-> More skills (security, frontend, quality) coming in future releases.
+| If you need help with...                                   | Use this skill      |
+| ---------------------------------------------------------- | ------------------- |
+| React, Next.js, TypeScript, UI components, CSS             | `frontend-expert`   |
+| Go development, testing, concurrency, HTTP handlers        | `go-expert`         |
+| Cloud infrastructure code (Terraform, CDK, CloudFormation) | `iac-expert`        |
+| Docker, containers, Kubernetes, orchestration              | `iac-expert`        |
+| Python development, testing, type hints, async patterns    | `python-expert`     |
 
 ## Skills vs Instructions
 
-| Aspect           | Instructions            | Skills                    |
-| ---------------- | ----------------------- | ------------------------- |
-| **Location**     | `.github/instructions/` | `.claude/skills/`         |
-| **Loading**      | Always in context       | On-demand                 |
-| **Purpose**      | Standards & rules       | Deep expertise            |
-| **Context Cost** | High (always loaded)    | Low (loaded when invoked) |
-| **Scope**        | Project/org-wide rules  | Domain-specific knowledge |
+| Aspect           | Instructions (`.github/instructions/`)  | Skills (`.claude/skills/`)         |
+| ---------------- | --------------------------------------- | ---------------------------------- |
+| **Location**     | `.github/instructions/*.instructions.md` | `.claude/skills/*/SKILL.md`        |
+| **Loading**      | Always in context                       | On-demand (when relevant)          |
+| **Purpose**      | Essential coding standards              | Deep domain expertise              |
+| **Size**         | ~30 lines (minimal)                     | Comprehensive (100s of lines)      |
+| **Context Cost** | Low (small, always loaded)              | Low (only loaded when needed)      |
+| **Scope**        | Project-wide coding rules               | Specialized domain knowledge       |
+| **Examples**     | `python.instructions.md`                | `python-expert/SKILL.md`           |
 
-## Setup for GitHub Copilot
+**Design Philosophy**: Instructions provide lightweight, always-applied standards. Skills provide comprehensive, on-demand expertise. This prevents context overflow while maintaining access to deep knowledge.
 
-1. **Ensure you have GitHub Copilot access** - Request via [Cortex Workflow](https://app.getcortexapp.com/admin/workflows/299)
-2. **Install the Copilot extension** in VS Code
-3. **Enable Claude Skills**:
-   - Open VS Code Settings (`Cmd+,` or `Ctrl+,`)
-   - Search for "skills"
-   - Enable **"Claude skills for chat"**
-4. **Verify skills are loaded** - Ask Copilot: "What skills do you have access to?"
+## Setup for VS Code
 
-![Enable Skills in VS Code Settings](https://vistaprint.atlassian.net/wiki/download/attachments/5255530829/skills-setting.png)
+Skills work automatically with GitHub Copilot and Claude in VS Code:
+
+1. **For GitHub Copilot**:
+   - Ensure you have GitHub Copilot access via [Cortex Workflow](https://app.getcortexapp.com/admin/workflows/299)
+   - Install the Copilot extension in VS Code
+   - Skills are automatically detected from `.claude/skills/` directory
+
+2. **For Claude/Anthropic**:
+   - Skills are loaded from `.claude/skills/` and `.github/skills/` directories
+   - No additional setup required
+
+3. **Verify skills are loaded**:
+   - Check VS Code's Output panel (View → Output → GitHub Copilot or Claude)
+   - Skills should appear in the available capabilities list
 
 ## Adding New Skills
 
-1. Create a new folder with a `SKILL.md` file (e.g., `my-skill/SKILL.md`)
-2. Add frontmatter with `name` and `description`:
+1. **Create skill directory**: `mkdir .claude/skills/my-skill`
+2. **Create SKILL.md** with frontmatter:
    ```yaml
    ---
    name: my-skill
-   description: Brief description of when to use this skill
+   description: Expert in [domain]. Use when working with [specific technologies/tasks].
    ---
    ```
-3. Follow the existing skill structure:
-   - Core expertise areas
-   - Best practices
-   - Approach section
-   - Examples and patterns
-4. Update this README with the new skill
-5. Test the skill with various prompts
+3. **Follow the established structure**:
+   - Title: `# My Skill Expert`
+   - Introduction: "You are an Expert Software Engineer with deep specialization in..."
+   - `## Core Expertise` with subsections (### Technologies, ### Best Practices, etc.)
+   - `## Approach` with numbered workflow steps
+   - Separator: `---`
+   - Detailed sections with examples and code patterns
+4. **Keep instructions minimal**: Update `.github/instructions/my.instructions.md` (20-30 lines)
+5. **Update this README** with the new skill
+6. **Test thoroughly** with various prompts and code scenarios
+
+**Pattern Reference**: See [iac-expert/SKILL.md](./iac-expert/SKILL.md) or [frontend-expert/SKILL.md](./frontend-expert/SKILL.md) for structure examples.
 
 ## Related Resources
 
