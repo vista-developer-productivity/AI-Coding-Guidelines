@@ -238,6 +238,23 @@ const HeavyComponent = lazy(() => import('./HeavyComponent'))
 // Avoid: importing entire libraries like import * as _ from 'lodash'
 ```
 
+### Dependency Management
+
+**Package.json Best Practices:**
+- Declare dependencies accurately (dependencies vs devDependencies)
+- Specify peer dependencies as ranges (e.g., `"react": ">=17 <19"`)
+- **Avoid `--legacy-peer-deps` flag** - fix peer dependency conflicts properly
+- Use exact versions for critical dependencies
+- Regular dependency audits: `npm audit` or `yarn audit`
+- Document dependency choices in ADRs for major additions
+
+**Bundle Size Management:**
+- Set bundle size budgets in build configuration
+- Monitor bundle sizes with webpack-bundle-analyzer or similar
+- Fail builds if bundle size exceeds thresholds
+- Use code splitting to reduce initial load
+- Analyze and remove unused dependencies
+
 ---
 
 ## CSS & Styling Expertise
