@@ -1,6 +1,6 @@
 ---
-description: 'Python coding standards. For detailed patterns, troubleshooting, and best practices, invoke the python-expert skill.'
-applyTo: '**/*.py'
+description: "Python coding standards. For detailed patterns, troubleshooting, and best practices, invoke the python-expert skill."
+applyTo: "**/*.py"
 ---
 
 # Python Coding Standards

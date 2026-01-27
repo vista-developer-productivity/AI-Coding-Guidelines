@@ -294,6 +294,7 @@ func TestGenerateOutput(t *testing.T) {
 ```
 
 **Usage:**
+
 - Normal runs: `go test` - compares against committed golden files
 - Update: `go test -update` - regenerates when expected output changes
 - Always review golden file changes before committing
@@ -318,10 +319,10 @@ def test_user_creation():
     """Test that users are created with correct attributes."""
     # Arrange
     user_data = {"name": "Alice", "email": "alice@example.com"}
-    
+
     # Act
     user = create_user(user_data)
-    
+
     # Assert
     assert user.name == "Alice"
     assert user.email == "alice@example.com"
@@ -344,7 +345,7 @@ def test_create_user(user_service):
     """Test successful user creation."""
     user_data = {"name": "Alice", "email": "alice@example.com"}
     user = user_service.create_user(user_data)
-    
+
     assert user.name == "Alice"
     assert user.email == "alice@example.com"
 ```
@@ -410,10 +411,10 @@ def test_with_mock():
     """Test with a mocked dependency."""
     mock_db = Mock()
     mock_db.query.return_value = [{"id": 1, "name": "Alice"}]
-    
+
     service = UserService(database=mock_db)
     users = service.get_all_users()
-    
+
     mock_db.query.assert_called_once_with("SELECT * FROM users")
     assert len(users) == 1
 
@@ -421,9 +422,9 @@ def test_with_mock():
 def test_with_patch(mock_api):
     """Test with patched external API."""
     mock_api.return_value = {"status": "success"}
-    
+
     result = process_api_request()
-    
+
     assert result["status"] == "success"
     mock_api.assert_called_once()
 ```
@@ -440,7 +441,7 @@ def test_error_details():
     """Test exception with detailed checks."""
     with pytest.raises(ValidationError) as exc_info:
         validate_user({"age": -1})
-    
+
     assert "age" in str(exc_info.value)
     assert exc_info.value.field == "age"
 ```
@@ -450,7 +451,7 @@ def test_error_details():
 ```python
 class TestUserService:
     """Tests for UserService class."""
-    
+
     @pytest.fixture(autouse=True)
     def setup(self):
         """Setup runs before each test method."""
@@ -458,12 +459,12 @@ class TestUserService:
         yield
         # Teardown after test
         self.service.cleanup()
-    
+
     def test_create_user(self):
         """Test user creation."""
         user = self.service.create_user({"name": "Alice"})
         assert user.name == "Alice"
-    
+
     def test_delete_user(self):
         """Test user deletion."""
         user = self.service.create_user({"name": "Bob"})
@@ -523,6 +524,7 @@ def authenticated_client(database):
 ### Testing Errors
 
 **Go:**
+
 ```go
 err := MyFunc()
 assert.ErrorIs(t, err, ErrNotFound)  // Specific error
@@ -531,6 +533,7 @@ require.NoError(t, err)               // No error
 ```
 
 **Python:**
+
 ```python
 with pytest.raises(ValueError):
     my_func()
@@ -572,6 +575,7 @@ async def test_async_with_mock():
 ### Testing Timeouts
 
 **Go:**
+
 ```go
 done := make(chan bool)
 go func() {
@@ -588,6 +592,7 @@ case <-time.After(5 * time.Second):
 ```
 
 **Python:**
+
 ```python
 @pytest.mark.timeout(5)
 def test_with_timeout():

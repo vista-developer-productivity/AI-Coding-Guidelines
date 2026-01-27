@@ -1,6 +1,6 @@
 ---
-description: 'Go testing standards. For comprehensive testing patterns, examples, and best practices, invoke the go-expert skill.'
-applyTo: '**/*_test.go'
+description: "Go testing standards. For comprehensive testing patterns, examples, and best practices, invoke the go-expert skill."
+applyTo: "**/*_test.go"
 ---
 
 # Go Testing Standards

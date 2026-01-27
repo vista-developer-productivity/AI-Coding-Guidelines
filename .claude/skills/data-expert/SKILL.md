@@ -122,14 +122,14 @@ models/
 
 ### Naming Conventions
 
-| Model Type | SQL File | YAML File | Examples |
-|------------|----------|-----------|----------|
-| **Staging** | `stg_{source_system}__{table}.sql` | `stg_{source_system}__{table}.yml` | `stg_employee__blueprint_employee.*` |
-| **Intermediate** | `int_{domain}__{description}.sql` | `int_{domain}__{description}.yml` | `int_finance__monthly_revenue.*` |
-| **Dimensions** | `dim_{entity}.sql` | `dim_{entity}.yml` | `dim_customer.*`, `dim_product.*` |
-| **Facts** | `fact_{process/event}.sql` | `fact_{process/event}.yml` | `fact_orders.*`, `fact_page_views.*` |
-| **Marts** | `mart_{domain}__{description}.sql` | `mart_{domain}__{description}.yml` | `mart_finance__revenue_summary.*` |
-| **Sources** | N/A | `_sources.yml` | Located in staging directory |
+| Model Type       | SQL File                           | YAML File                          | Examples                             |
+| ---------------- | ---------------------------------- | ---------------------------------- | ------------------------------------ |
+| **Staging**      | `stg_{source_system}__{table}.sql` | `stg_{source_system}__{table}.yml` | `stg_employee__blueprint_employee.*` |
+| **Intermediate** | `int_{domain}__{description}.sql`  | `int_{domain}__{description}.yml`  | `int_finance__monthly_revenue.*`     |
+| **Dimensions**   | `dim_{entity}.sql`                 | `dim_{entity}.yml`                 | `dim_customer.*`, `dim_product.*`    |
+| **Facts**        | `fact_{process/event}.sql`         | `fact_{process/event}.yml`         | `fact_orders.*`, `fact_page_views.*` |
+| **Marts**        | `mart_{domain}__{description}.sql` | `mart_{domain}__{description}.yml` | `mart_finance__revenue_summary.*`    |
+| **Sources**      | N/A                                | `_sources.yml`                     | Located in staging directory         |
 
 **Naming Rules:**
 
@@ -177,7 +177,7 @@ models:
         data_tests:
           - not_null
           - unique
-      
+
       # Business-friendly documentation with usage context
       - name: customer_lifetime_value
         description: |
@@ -186,14 +186,14 @@ models:
           and predictive modeling. Used by Sales for account prioritization and
           Marketing for campaign targeting.
         data_type: number(10,2)
-        
+
       - name: acquisition_channel
         description: |
           The marketing channel through which we first acquired this customer.
           Common values include 'paid_search', 'social_media', 'direct', 'referral'.
           Critical for marketing attribution and campaign ROI analysis.
         data_type: varchar
-        
+
       # Categorical field with constraints
       - name: customer_status
         description: Current status of the customer account
@@ -209,12 +209,14 @@ models:
 ### Documentation Configuration
 
 **Model-level parameters:**
+
 - `description`: Detailed business description with purpose, usage, context
 - `docs.show`: Enable documentation visibility
 - `config.contract.enforced`: Schema contract enforcement
 - `config.persist_docs`: Push documentation to database metadata
 
 **Constraint types:**
+
 - `primary_key`: Primary key constraint
 - `not_null`: Enforce non-null values
 - `unique`: Enforce unique values
@@ -341,10 +343,10 @@ final AS (
         COALESCE(m.total_orders, 0) AS total_orders,
         COALESCE(m.total_revenue, 0) AS total_revenue,
         -- Business logic with clear intent
-        CASE 
-            WHEN DATE_DIFF('day', c.created_at, CURRENT_DATE) > 365 
-            THEN 'veteran' 
-            ELSE 'new' 
+        CASE
+            WHEN DATE_DIFF('day', c.created_at, CURRENT_DATE) > 365
+            THEN 'veteran'
+            ELSE 'new'
         END AS customer_segment
     FROM active_customers c
     LEFT JOIN customer_metrics m
@@ -390,7 +392,7 @@ Choose based on use case:
 WITH new_events AS (
     SELECT *
     FROM {{ source('events', 'raw_events') }}
-    
+
     {% if is_incremental() %}
         WHERE event_timestamp > (SELECT MAX(event_timestamp) FROM {{ this }})
     {% endif %}
@@ -423,12 +425,12 @@ models:
     description: |
       Every order placed in our system. This table powers all revenue reporting,
       customer purchase analysis, and sales performance dashboards.
-      
+
       **Use this when**: You need order-level detail for analysis
-      **Common questions**: "How many orders did we get last month?" or 
+      **Common questions**: "How many orders did we get last month?" or
       "What's the average order value by customer segment?"
-      
-      **Key relationships**: 
+
+      **Key relationships**:
       - Links to dim_customer via customer_id for customer details
       - Links to dim_product via product_id for product information
       - Links to dim_date via order_date for time-based analysis
@@ -443,7 +445,7 @@ Make foreign keys explicit and well-documented:
 columns:
   - name: customer_id
     description: |
-      Unique customer identifier. Use this to join to fact_orders, 
+      Unique customer identifier. Use this to join to fact_orders,
       fact_page_views, or any customer activity table.
     data_type: varchar
     constraints:
@@ -526,11 +528,13 @@ models:
 ### Package Management
 
 **Common useful packages:**
+
 - `dbt-utils`: Essential macros and tests
 - `dbt-expectations`: Advanced data quality tests
 - `codegen`: Code generation helpers
 
 **Best practices:**
+
 - Pin package versions for reproducibility
 - Document package purposes
 - Regular updates and dependency management
@@ -625,6 +629,7 @@ WHERE a.cnt != b.cnt
 ## Best Practices Summary
 
 ### Model Development
+
 - Start simple and iterate
 - Write maintainable, understandable models
 - Consider end users when designing
@@ -633,6 +638,7 @@ WHERE a.cnt != b.cnt
 - Regular code reviews
 
 ### Production Readiness
+
 - Ensure all models have appropriate tests
 - Validate in production-like environment
 - Plan for monitoring and alerting
@@ -641,6 +647,7 @@ WHERE a.cnt != b.cnt
 - Monitor data freshness and quality
 
 ### Collaboration
+
 - Use team-consistent conventions
 - Document team-specific standards
 - Knowledge sharing through reviews

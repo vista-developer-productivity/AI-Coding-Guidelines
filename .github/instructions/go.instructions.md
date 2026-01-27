@@ -1,6 +1,6 @@
 ---
-description: 'Go coding standards. For detailed patterns, troubleshooting, and best practices, invoke the go-expert skill.'
-applyTo: '**/*.go,**/go.mod,**/go.sum'
+description: "Go coding standards. For detailed patterns, troubleshooting, and best practices, invoke the go-expert skill."
+applyTo: "**/*.go,**/go.mod,**/go.sum"
 ---
 
 # Go Coding Standards

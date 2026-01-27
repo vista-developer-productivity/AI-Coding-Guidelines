@@ -143,14 +143,14 @@ type User struct {
 func getUserHandler(w http.ResponseWriter, r *http.Request) {
     // Extract ID from URL
     id := r.URL.Query().Get("id")
-    
+
     // Business logic
     user := User{ID: 1, Name: "Alice", Email: "alice@example.com"}
-    
+
     // Set headers
     w.Header().Set("Content-Type", "application/json")
     w.WriteHeader(http.StatusOK)
-    
+
     // Encode response
     json.NewEncoder(w).Encode(user)
 }
@@ -187,7 +187,7 @@ func NewServer(db Database) *Server {
         router: chi.NewRouter(),
         db:     db,
     }
-    
+
     s.routes()
     return s
 }
@@ -196,7 +196,7 @@ func (s *Server) routes() {
     s.router.Use(middleware.Logger)
     s.router.Use(middleware.Recoverer)
     s.router.Use(middleware.Timeout(60 * time.Second))
-    
+
     s.router.Get("/health", s.handleHealth())
     s.router.Route("/api/v1", func(r chi.Router) {
         r.Get("/users", s.handleListUsers())
@@ -211,16 +211,16 @@ func (s *Server) handleGetUser() http.HandlerFunc {
     type response struct {
         User User `json:"user"`
     }
-    
+
     return func(w http.ResponseWriter, r *http.Request) {
         id := chi.URLParam(r, "id")
-        
+
         user, err := s.db.GetUser(r.Context(), id)
         if err != nil {
             s.respondError(w, http.StatusNotFound, "User not found")
             return
         }
-        
+
         s.respondJSON(w, http.StatusOK, response{User: user})
     }
 }
@@ -246,10 +246,10 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 func loggingMiddleware(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         start := time.Now()
-        
+
         // Call the next handler
         next.ServeHTTP(w, r)
-        
+
         // Log after handling
         log.Printf("%s %s %v", r.Method, r.URL.Path, time.Since(start))
     })
@@ -258,16 +258,16 @@ func loggingMiddleware(next http.Handler) http.Handler {
 func authMiddleware(next http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         token := r.Header.Get("Authorization")
-        
+
         if !isValidToken(token) {
             http.Error(w, "Unauthorized", http.StatusUnauthorized)
             return
         }
-        
+
         // Add user to context
         userID := extractUserID(token)
         ctx := context.WithValue(r.Context(), "userID", userID)
-        
+
         next.ServeHTTP(w, r.WithContext(ctx))
     })
 }
@@ -282,7 +282,7 @@ func authMiddleware(next http.Handler) http.Handler {
 ```go
 func workerPool(ctx context.Context, jobs <-chan Job, results chan<- Result, numWorkers int) {
     var wg sync.WaitGroup
-    
+
     for i := 0; i < numWorkers; i++ {
         wg.Add(1)
         go func() {
@@ -298,7 +298,7 @@ func workerPool(ctx context.Context, jobs <-chan Job, results chan<- Result, num
             }
         }()
     }
-    
+
     wg.Wait()
     close(results)
 }
@@ -310,7 +310,7 @@ func workerPool(ctx context.Context, jobs <-chan Job, results chan<- Result, num
 func handleRequest(w http.ResponseWriter, r *http.Request) {
     ctx, cancel := context.WithTimeout(r.Context(), 5*time.Second)
     defer cancel()
-    
+
     result, err := fetchDataWithContext(ctx)
     if err != nil {
         if ctx.Err() == context.DeadlineExceeded {
@@ -320,14 +320,14 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
         http.Error(w, err.Error(), http.StatusInternalServerError)
         return
     }
-    
+
     json.NewEncoder(w).Encode(result)
 }
 
 func fetchDataWithContext(ctx context.Context) (Data, error) {
     resultCh := make(chan Data, 1)
     errCh := make(chan error, 1)
-    
+
     go func() {
         // Simulate expensive operation
         data, err := queryDatabase()
@@ -337,7 +337,7 @@ func fetchDataWithContext(ctx context.Context) (Data, error) {
         }
         resultCh <- data
     }()
-    
+
     select {
     case <-ctx.Done():
         return Data{}, ctx.Err()
@@ -365,7 +365,7 @@ func fanOut(input <-chan int, workers int) []<-chan int {
 func fanIn(channels ...<-chan int) <-chan int {
     out := make(chan int)
     var wg sync.WaitGroup
-    
+
     for _, ch := range channels {
         wg.Add(1)
         go func(c <-chan int) {
@@ -375,12 +375,12 @@ func fanIn(channels ...<-chan int) <-chan int {
             }
         }(ch)
     }
-    
+
     go func() {
         wg.Wait()
         close(out)
     }()
-    
+
     return out
 }
 ```
@@ -433,7 +433,7 @@ def get_user(user_id: int):
 def create_user(user: UserCreate):
     """Create a new user."""
     global user_id_counter
-    
+
     new_user = User(
         id=user_id_counter,
         name=user.name,
@@ -441,7 +441,7 @@ def create_user(user: UserCreate):
     )
     users_db[user_id_counter] = new_user
     user_id_counter += 1
-    
+
     return new_user
 
 @app.put("/users/{user_id}", response_model=User)
@@ -449,7 +449,7 @@ def update_user(user_id: int, user: UserCreate):
     """Update an existing user."""
     if user_id not in users_db:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     updated_user = User(id=user_id, name=user.name, email=user.email)
     users_db[user_id] = updated_user
     return updated_user
@@ -459,7 +459,7 @@ def delete_user(user_id: int):
     """Delete a user."""
     if user_id not in users_db:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     del users_db[user_id]
 ```
 
@@ -509,13 +509,13 @@ class UserCreate(BaseModel):
     name: str
     email: EmailStr
     age: int
-    
+
     @validator('age')
     def validate_age(cls, v):
         if v < 0 or v > 150:
             raise ValueError('Age must be between 0 and 150')
         return v
-    
+
     @validator('name')
     def validate_name(cls, v):
         if len(v) < 2:
@@ -554,7 +554,7 @@ async def fetch_data():
             client.get("https://api2.example.com/data"),
             client.get("https://api3.example.com/data"),
         )
-        
+
         return {
             "api1": results[0].json(),
             "api2": results[1].json(),
@@ -567,7 +567,7 @@ async def process_items(items: List[str]):
     async def process_item(item: str):
         await asyncio.sleep(1)  # Simulate async work
         return f"Processed: {item}"
-    
+
     # Process all items concurrently
     results = await asyncio.gather(
         *[process_item(item) for item in items]
@@ -592,14 +592,14 @@ async def create_user(
 ):
     """Create user and send welcome email in background."""
     new_user = save_user_to_db(user)
-    
+
     # Add task to background
     background_tasks.add_task(
         send_email,
         user.email,
         "Welcome to our platform!"
     )
-    
+
     return new_user
 ```
 
@@ -628,10 +628,10 @@ async def get_user(user_id: int, db: AsyncSession = Depends(get_db)):
         select(User).where(User.id == user_id)
     )
     user = result.scalar_one_or_none()
-    
+
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     return user
 ```
 
@@ -642,13 +642,14 @@ async def get_user(user_id: int, db: AsyncSession = Depends(get_db)):
 ### JWT Authentication
 
 **Go:**
+
 ```go
 func generateJWT(userID string) (string, error) {
     token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
         "user_id": userID,
         "exp":     time.Now().Add(time.Hour * 24).Unix(),
     })
-    
+
     return token.SignedString([]byte(jwtSecret))
 }
 
@@ -663,6 +664,7 @@ func validateJWT(tokenString string) (*jwt.Token, error) {
 ```
 
 **Python:**
+
 ```python
 from jose import JWTError, jwt
 from datetime import datetime, timedelta
@@ -677,7 +679,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
         expire = datetime.utcnow() + expires_delta
     else:
         expire = datetime.utcnow() + timedelta(minutes=15)
-    
+
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
@@ -713,6 +715,7 @@ async def limited_endpoint(request: Request):
 ## Best Practices Summary
 
 ### API Design
+
 - Use clear, consistent naming conventions
 - Version your APIs (`/api/v1/...`)
 - Return appropriate HTTP status codes
@@ -721,6 +724,7 @@ async def limited_endpoint(request: Request):
 - Document with OpenAPI/Swagger
 
 ### Performance
+
 - Implement caching strategies
 - Use connection pooling
 - Optimize database queries
@@ -729,6 +733,7 @@ async def limited_endpoint(request: Request):
 - Use CDN for static content
 
 ### Security
+
 - Always validate input
 - Use HTTPS in production
 - Implement authentication and authorization
@@ -737,6 +742,7 @@ async def limited_endpoint(request: Request):
 - Keep dependencies updated
 
 ### Observability
+
 - Use structured logging
 - Implement request tracing
 - Monitor key metrics

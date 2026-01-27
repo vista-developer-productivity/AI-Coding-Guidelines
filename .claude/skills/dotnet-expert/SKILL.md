@@ -84,8 +84,8 @@ public class UserService : IUserService
     private readonly ILogger<UserService> _logger;
     private readonly ApplicationDbContext _context;
     public const int MaxRetryAttempts = 3;
-    
-    public async Task<UserDto> GetUserByIdAsync(int userId) => 
+
+    public async Task<UserDto> GetUserByIdAsync(int userId) =>
         await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 }
 ```
@@ -108,6 +108,7 @@ public class UserService : IUserService
 ### Code Organization
 
 Order class members:
+
 1. Constants
 2. Fields (private, then protected, then public)
 3. Constructors
@@ -129,12 +130,12 @@ public class UserService
 {
     private const int DefaultPageSize = 10;
     private readonly ILogger<UserService> _logger;
-    
+
     public UserService(ILogger<UserService> logger)
     {
         _logger = logger;
     }
-    
+
     public async Task<List<User>> GetUsersAsync(int page = 1)
     {
         var skip = (page - 1) * DefaultPageSize;
@@ -222,11 +223,11 @@ public partial class UserService
     [LoggerMessage(EventId = 1, Level = LogLevel.Information,
         Message = "Creating user for email {Email}")]
     private partial void LogUserCreation(string email);
-    
+
     [LoggerMessage(EventId = 2, Level = LogLevel.Error,
         Message = "Failed to create user")]
     private partial void LogUserCreationFailed(Exception ex);
-    
+
     public async Task<Result<UserDto>> CreateUserAsync(CreateUserRequest request)
     {
         LogUserCreation(request.Email);
@@ -253,7 +254,7 @@ public partial class EmailValidator
 {
     [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$")]
     private static partial Regex EmailRegex();
-    
+
     public static bool IsValidEmail(string email) => EmailRegex().IsMatch(email);
 }
 ```
@@ -300,13 +301,13 @@ public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
     private readonly ILogger<UsersController> _logger;
-    
+
     public UsersController(IUserService userService, ILogger<UsersController> logger)
     {
         _userService = userService;
         _logger = logger;
     }
-    
+
     [HttpGet]
     public async Task<ActionResult<List<UserDto>>> GetUsers(
         [FromQuery] int page = 1,
@@ -315,7 +316,7 @@ public class UsersController : ControllerBase
         var users = await _userService.GetUsersAsync(page, pageSize);
         return Ok(users);
     }
-    
+
     [HttpGet("{id:int}")]
     [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -324,29 +325,29 @@ public class UsersController : ControllerBase
         var user = await _userService.GetUserByIdAsync(id);
         return user is not null ? Ok(user) : NotFound();
     }
-    
+
     [HttpPost]
     [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<UserDto>> CreateUser([FromBody] CreateUserRequest request)
     {
-        if (!ModelState.IsValid) 
+        if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        
+
         var result = await _userService.CreateUserAsync(request);
-        
-        return result.IsSuccess 
+
+        return result.IsSuccess
             ? CreatedAtAction(nameof(GetUser), new { id = result.Value!.Id }, result.Value)
             : BadRequest(result.Error);
     }
-    
+
     [HttpPut("{id:int}")]
     public async Task<ActionResult<UserDto>> UpdateUser(int id, [FromBody] UpdateUserRequest request)
     {
         var result = await _userService.UpdateUserAsync(id, request);
         return result.IsSuccess ? Ok(result.Value) : NotFound();
     }
-    
+
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
@@ -363,13 +364,13 @@ public class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
-    
+
     public ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
     {
         _next = next;
         _logger = logger;
     }
-    
+
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -381,11 +382,11 @@ public class ExceptionHandlingMiddleware
             await HandleExceptionAsync(context, ex);
         }
     }
-    
+
     private async Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
         _logger.LogError(exception, "Unhandled exception occurred");
-        
+
         var (statusCode, message) = exception switch
         {
             ValidationException => (StatusCodes.Status400BadRequest, "Validation failed"),
@@ -393,10 +394,10 @@ public class ExceptionHandlingMiddleware
             UnauthorizedException => (StatusCodes.Status401Unauthorized, "Unauthorized"),
             _ => (StatusCodes.Status500InternalServerError, "An error occurred")
         };
-        
+
         context.Response.StatusCode = statusCode;
         context.Response.ContentType = "application/json";
-        
+
         await context.Response.WriteAsJsonAsync(new
         {
             error = message,
@@ -453,7 +454,7 @@ public class UserService : IUserService
     private readonly IEmailService _emailService;
     private readonly ILogger<UserService> _logger;
     private readonly IOptions<EmailOptions> _emailOptions;
-    
+
     public UserService(
         ApplicationDbContext context,
         IEmailService emailService,
@@ -481,10 +482,10 @@ public class ApplicationDbContext : DbContext
         : base(options)
     {
     }
-    
+
     public DbSet<User> Users => Set<User>();
     public DbSet<Order> Orders => Set<Order>();
-    
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         // Configure entity
@@ -493,14 +494,14 @@ public class ApplicationDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Email).IsRequired().HasMaxLength(255);
             entity.HasIndex(e => e.Email).IsUnique();
-            
+
             // Relationships
             entity.HasMany(e => e.Orders)
                   .WithOne(e => e.User)
                   .HasForeignKey(e => e.UserId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
-        
+
         // Seed data
         modelBuilder.Entity<User>().HasData(
             new User { Id = 1, Name = "Admin", Email = "admin@example.com" }
@@ -562,10 +563,10 @@ public class Repository<T> : IRepository<T> where T : class
 public class UserService : IUserService
 {
     private readonly ApplicationDbContext _context;
-    
+
     public async Task<User?> GetByIdAsync(int id) =>
         await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-    
+
     public async Task<List<User>> GetActiveUsersAsync() =>
         await _context.Users.Where(u => u.IsActive).ToListAsync();
 }
@@ -583,7 +584,7 @@ public record Result<T>
     public bool IsSuccess { get; init; }
     public T? Value { get; init; }
     public string? Error { get; init; }
-    
+
     public static Result<T> Success(T value) => new() { IsSuccess = true, Value = value };
     public static Result<T> Failure(string error) => new() { IsSuccess = false, Error = error };
 }
@@ -593,7 +594,7 @@ public async Task<Result<UserDto>> CreateUserAsync(CreateUserRequest request)
 {
     if (!EmailValidator.IsValid(request.Email))
         return Result<UserDto>.Failure("Invalid email format");
-    
+
     try
     {
         var user = new User { Name = request.Name, Email = request.Email };
@@ -621,14 +622,14 @@ public class UserServiceTests
     private readonly Mock<ApplicationDbContext> _contextMock;
     private readonly Mock<ILogger<UserService>> _loggerMock;
     private readonly UserService _userService;
-    
+
     public UserServiceTests()
     {
         _contextMock = new Mock<ApplicationDbContext>();
         _loggerMock = new Mock<ILogger<UserService>>();
         _userService = new UserService(_contextMock.Object, _loggerMock.Object);
     }
-    
+
     [Fact]
     public async Task GetUserByIdAsync_WithValidId_ShouldReturnUser()
     {
@@ -637,16 +638,16 @@ public class UserServiceTests
         var expectedUser = new User { Id = userId, Name = "Test", Email = "test@example.com" };
         _contextMock.Setup(c => c.Users.FindAsync(userId))
                    .ReturnsAsync(expectedUser);
-        
+
         // Act
         var result = await _userService.GetUserByIdAsync(userId);
-        
+
         // Assert
         Assert.NotNull(result);
         Assert.Equal(expectedUser.Id, result.Id);
         Assert.Equal(expectedUser.Name, result.Name);
     }
-    
+
     [Theory]
     [InlineData(0)]
     [InlineData(-1)]
@@ -655,10 +656,10 @@ public class UserServiceTests
         // Arrange
         _contextMock.Setup(c => c.Users.FindAsync(invalidId))
                    .ReturnsAsync((User?)null);
-        
+
         // Act
         var result = await _userService.GetUserByIdAsync(invalidId);
-        
+
         // Assert
         Assert.Null(result);
     }
@@ -672,34 +673,34 @@ public class UsersControllerIntegrationTests : IClassFixture<WebApplicationFacto
 {
     private readonly WebApplicationFactory<Program> _factory;
     private readonly HttpClient _client;
-    
+
     public UsersControllerIntegrationTests(WebApplicationFactory<Program> factory)
     {
         _factory = factory;
         _client = factory.CreateClient();
     }
-    
+
     [Fact]
     public async Task GetUsers_ShouldReturnSuccessStatusCode()
     {
         // Act
         var response = await _client.GetAsync("/api/users");
-        
+
         // Assert
         response.EnsureSuccessStatusCode();
         var users = await response.Content.ReadFromJsonAsync<List<UserDto>>();
         Assert.NotNull(users);
     }
-    
+
     [Fact]
     public async Task CreateUser_WithValidData_ShouldReturnCreatedUser()
     {
         // Arrange
         var request = new CreateUserRequest("Test User", "test@example.com");
-        
+
         // Act
         var response = await _client.PostAsJsonAsync("/api/users", request);
-        
+
         // Assert
         response.EnsureSuccessStatusCode();
         Assert.Equal(HttpStatusCode.Created, response.StatusCode);
@@ -720,7 +721,7 @@ public class UsersControllerIntegrationTests : IClassFixture<WebApplicationFacto
 public class EmailOptions
 {
     public const string SectionName = "Email";
-    
+
     public string SmtpServer { get; set; } = string.Empty;
     public int SmtpPort { get; set; }
     public string FromAddress { get; set; } = string.Empty;
@@ -745,7 +746,7 @@ builder.Services.Configure<EmailOptions>(
 public class EmailService
 {
     private readonly EmailOptions _options;
-    
+
     public EmailService(IOptions<EmailOptions> options)
     {
         _options = options.Value;
@@ -789,23 +790,23 @@ public class UserService
 {
     private readonly IMemoryCache _cache;
     private readonly ApplicationDbContext _context;
-    
+
     public async Task<UserDto?> GetUserByIdAsync(int userId)
     {
         var cacheKey = $"user_{userId}";
-        
+
         if (_cache.TryGetValue(cacheKey, out UserDto? cachedUser))
             return cachedUser;
-        
+
         var user = await _context.Users.FindAsync(userId);
-        
+
         if (user is not null)
         {
             var userDto = user.ToDto();
             _cache.Set(cacheKey, userDto, TimeSpan.FromMinutes(5));
             return userDto;
         }
-        
+
         return null;
     }
 }
@@ -823,7 +824,7 @@ public record CreateUserRequest
     [Required]
     [StringLength(100, MinimumLength = 2)]
     public string Name { get; init; } = string.Empty;
-    
+
     [Required]
     [EmailAddress]
     public string Email { get; init; } = string.Empty;
@@ -841,11 +842,11 @@ public class UsersController : ControllerBase
     [HttpGet]
     [AllowAnonymous]
     public async Task<ActionResult<List<UserDto>>> GetUsers() { }
-    
+
     [HttpPost]
     [Authorize(Roles = "Admin")]
     public async Task<ActionResult<UserDto>> CreateUser([FromBody] CreateUserRequest request) { }
-    
+
     [HttpDelete("{id}")]
     [Authorize(Policy = "CanDeleteUsers")]
     public async Task<IActionResult> DeleteUser(int id) { }

@@ -1,6 +1,6 @@
 ---
-description: 'C# and .NET coding conventions and best practices'
-applyTo: '**/*.cs, **/*.csproj, **/*.sln, **/appsettings*.json'
+description: "C# and .NET coding conventions and best practices"
+applyTo: "**/*.cs, **/*.csproj, **/*.sln, **/appsettings*.json"
 ---
 
 # C# and .NET Development Instructions [v1.0]

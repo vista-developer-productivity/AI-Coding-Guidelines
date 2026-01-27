@@ -1,6 +1,6 @@
 ---
-description: 'TypeScript and JavaScript coding standards'
-applyTo: '**/*.ts, **/*.js, **/*.jsx, **/*.tsx'
+description: "TypeScript and JavaScript coding standards"
+applyTo: "**/*.ts, **/*.js, **/*.jsx, **/*.tsx"
 ---
 
 # TypeScript and JavaScript Coding Standards [v1.0]
@@ -8,6 +8,7 @@ applyTo: '**/*.ts, **/*.js, **/*.jsx, **/*.tsx'
 Minimal standards for TypeScript/JavaScript. For comprehensive React, TypeScript, and frontend guidance, invoke the `frontend-expert` skill.
 
 ## Configuration Precedence
+
 1. **Project config files** (`.prettierrc`, `.eslintrc`, `stylelint.config.js`) - Always take precedence
 2. **This document** - Apply when no project config exists
 3. **IDE defaults** - Fallback only
@@ -45,18 +46,18 @@ Minimal standards for TypeScript/JavaScript. For comprehensive React, TypeScript
 ```typescript
 // Good: Interface for complex reusable structure
 interface UserData {
-  readonly id: string
-  name: string
-  email: string
+  readonly id: string;
+  name: string;
+  email: string;
 }
 
 // Good: Inline type for simple single-use
-function Button(props: { text: string; onClick: () => void }) { }
+function Button(props: { text: string; onClick: () => void }) {}
 
 // Good: Type guard
 const isUserData = (value: unknown): value is UserData => {
-  return typeof value === 'object' && value !== null && 'id' in value
-}
+  return typeof value === "object" && value !== null && "id" in value;
+};
 ```
 
 ## Import Organization
