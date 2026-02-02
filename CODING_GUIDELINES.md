@@ -30,6 +30,7 @@ Begin by clearly defining the immersive coding environment:
 
 * Explicitly introduce AI agents to key architectural patterns and dependencies.  
 * Provide high-level project documentation outlining the application's structure and core responsibilities.  
+* Invoke domain-specific skills (e.g., `backend-expert`, `frontend-expert`) for specialized architectural guidance.
 * You can also have the AI produce the above via an interactive discussion of the problem and your ideas. 
 
 **Clarifying Application Intent and Problem Space**
@@ -63,12 +64,13 @@ Before you begin coding tasks, engage the AI agent in a structured design discus
 **Step-by-Step Collaborative Design Process**
 
 1. **Present the Problem Clearly**: Articulate the issue in detail, including its context within the application, desired outcomes, and any known constraints.  
-2. **Solicit AI's Design Proposals**: Ask the AI to outline possible solutions, specifying the components involved, data flows, and architectural considerations.  
-3. **Encourage AI to Ask Questions**: Prompt the AI to identify ambiguities or missing information by asking clarifying questions.  
-4. **Iterate on the Design**: Review the AI's proposals, provide feedback, and refine the design through multiple iterations until a satisfactory plan is achieved.  
-5. **Assess Risks and Complexity**: Request the AI evaluate proposed solutions for potential risks, side effects, and complexity.  
-6. **Validate Against the Codebase**: Ensure the AI considers the existing codebase, checking for compatibility and potential side effects.  
-7. **Finalize Before Coding**: Confirm that the design aligns with project goals and standards before proceeding to implementation.
+2. **Invoke Relevant Skills**: For domain-specific challenges, invoke the appropriate skill (e.g., `backend-expert` for API design, `testing-expert` for test strategies) to access deep expertise.
+3. **Solicit AI's Design Proposals**: Ask the AI to outline possible solutions, specifying the components involved, data flows, and architectural considerations.  
+4. **Encourage AI to Ask Questions**: Prompt the AI to identify ambiguities or missing information by asking clarifying questions.  
+5. **Iterate on the Design**: Review the AI's proposals, provide feedback, and refine the design through multiple iterations until a satisfactory plan is achieved.  
+6. **Assess Risks and Complexity**: Request the AI evaluate proposed solutions for potential risks, side effects, and complexity.  
+7. **Validate Against the Codebase**: Ensure the AI considers the existing codebase, checking for compatibility and potential side effects.  
+8. **Finalize Before Coding**: Confirm that the design aligns with project goals and standards before proceeding to implementation.
 
 This collaborative approach ensures mutual understanding, leading to efficient and effective development.
 
@@ -123,6 +125,13 @@ Effective testing and debugging are crucial when collaborating with AI agents. H
 **Advanced AI Coaching Techniques**
 
 To be an effective AI coach, employ these specific practices:
+
+**Leverage Skills for Deep Expertise**
+
+* Invoke domain skills when you need comprehensive guidance beyond basic standards.
+* Use `backend-expert` for API design, `testing-expert` for test strategies, `iac-expert` for infrastructure patterns.
+* Skills provide on-demand expertise without bloating the always-loaded context.
+* See `.copilot/skills/README.md` for available skills and invocation patterns.
 
 **Structure Documentation to Avoid Pattern Pollution**
 
@@ -222,3 +231,5 @@ Here is an example for providing clear and explicit guidance to the AI within so
 
 **Meta-Lesson**  
 The essential insight for coaching AI effectively is recognizing its tendency to theorize and overcomplicate. The best interventions consistently reinforce simple, explicit, step-by-step debugging practices grounded in concrete evidence and clearly defined problems.
+
+As AI evolves toward multi-agent architectures, skills become even more valuable—each specialized agent can invoke the relevant skill (`testing-expert` for a Test Agent, `backend-expert` for a Backend Agent) to access deep domain knowledge on demand.

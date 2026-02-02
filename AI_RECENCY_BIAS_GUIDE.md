@@ -211,6 +211,8 @@ Understanding recency bias helps you recognize when the coaching guidelines' tec
 
 The file-first defense strategy remains your most reliable approach to managing recency bias in AI-assisted development. By embedding critical context directly in your code artifacts—through immutable headers, comment breadcrumbs, and centralized documentation—you create persistent reference points that resist conversational degradation. When conversational techniques become necessary, use them as diagnostic and corrective tools rather than primary strategies.
 
+**Applying to Skills**: These principles apply equally when writing or invoking skills (`.copilot/skills/*/SKILL.md`). Skills are file-based artifacts that persist across sessions, making them inherently resistant to recency bias. When writing skills, place critical patterns and constraints at the end of documents to leverage attention mechanisms, and use positive framing to avoid pattern pollution.
+
 Remember: The [Coding Guidelines](CODING_GUIDELINES.md) provide the tactical framework for managing AI behavior. Understanding recency bias helps you recognize when these tactics are most needed and why they work, making you a more effective AI coach in your development projects.
 
 ## Research Reference

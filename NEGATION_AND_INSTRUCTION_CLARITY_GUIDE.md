@@ -272,4 +272,17 @@ Recent academic research confirms these challenges:
 
 ---
 
+## Applying to Skills
+
+These negation and clarity principles are especially important when writing skills (`.copilot/skills/*/SKILL.md`):
+
+- **Use positive framing** in skill instructions—specify what the AI should do, not what to avoid
+- **Show correct patterns only**—describe anti-patterns textually without complete code examples
+- **Use contractions** (`don't`, `shouldn't`) when negation is unavoidable
+- **Place critical guidance at the end** of skill documents to leverage attention mechanisms
+
+Skills are on-demand expertise loaded into context, making their clarity crucial for reliable AI behavior.
+
+---
+
 *This guide is based on current research and practical experience with Large Language Models. As the field evolves, these recommendations may be refined based on new findings and improved model capabilities.*
