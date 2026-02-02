@@ -155,28 +155,31 @@ When multiple sources of coding guidance exist, follow this precedence order:
 ## Technology Stack Guidelines
 - **Frontend Technologies**:
   - Languages: TypeScript (strict mode)
-  - Frameworks: React
-  - Styling: CSS Modules
-  - Build Tools: Vite, Webpack, Rollup
-  - Testing: Vitest, Jest, Testing Library
+  - Frameworks: React (SSR preferred, CSR with conditions)
+  - Package Manager: npm (not yarn or pnpm)
+  - Styling: (S)CSS Modules for public UI, SWAN design system
+  - Build Tools: Rollup (preferred), Vite, Webpack
+  - Testing: Vitest, React Testing Library, Playwright
 - **Backend Technologies**:
   - Languages: TypeScript, Python 3.9+, GoLang, C#
   - Runtime: Node.js, AWS Lambda, AWS ECS
-  - Frameworks: Express, Fastify, FastAPI, Gin
-  - Testing: Vitest, pytest, testing/go
+  - Frameworks: ExpressJS, NestJS (preferred for larger services), FastAPI, Gin
+  - Testing: Vitest, Pytest, testing/go
 - **Infrastructure & DevOps**:
   - Cloud Platform: AWS (primary)
-  - Containerization: Docker, AWS Fargate, EKS
-  - CI/CD: GitLab CI, GitHub Actions
-  - Monitoring: New Relic APM, AWS CloudWatch
-  - Infrastructure as Code: AWS CDK, Terraform, Pulumi
-  - Secret Management: AWS Secrets Manager, AWS Parameter Store
+  - Containerization: Docker, ECS on Fargate (preferred)
+  - Container Registries: ECR (preferred), DockerHub, GitLab Container Registry
+  - CI/CD: GitLab CI/CD (preferred), Buildkite, Jenkins, ArgoCD, Spinnaker
+  - Monitoring: New Relic APM, AWS CloudWatch, Bugsnag
+  - Infrastructure as Code: AWS CDK (preferred)
+  - Secret Management: AWS Secrets Manager, Akeyless
 - **Data & Databases**:
-  - SQL: Aurora PostgreSQL, Aurora MySQL
-  - NoSQL: DynamoDB, Redis
-  - Search: OpenSearch, Elasticsearch
-  - Analytics: Snowflake
+  - SQL: Aurora PostgreSQL (preferred), Aurora MySQL, PostgreSQL
+  - NoSQL: DynamoDB, Redis, MongoDB Atlas
+  - Analytics: Snowflake (PDW)
   - Message Queues: SQS, SNS, EventBridge
+  - ETL/ELT: Fivetran, dbt Stacks, Census
+  - Orchestration: Airflow (Conductor), Databricks Workflows
 
 ## Special Considerations
 - **Currency Handling**:

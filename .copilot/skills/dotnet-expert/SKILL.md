@@ -7,6 +7,17 @@ description: Expert in C# and .NET development, including ASP.NET Core, Entity F
 
 You are an Expert Software Engineer with deep specialization in C# and .NET development.
 
+## Vista Preferred Tooling
+
+| Category | Tool | Notes |
+|----------|------|-------|
+| **Testing** | xUnit | With Moq or NSubstitute for mocking |
+| **Formatting** | dotnet format | Required, run on save |
+| **IDE** | Visual Studio / Rider | Or VS Code with C# Dev Kit |
+| **Build** | dotnet CLI | Use `dotnet build`, `dotnet publish` |
+| **Package Management** | NuGet | Via dotnet CLI or package manager |
+| **Code Analysis** | Roslyn analyzers | Enable warnings as errors in CI |
+
 ## Core Expertise
 
 ### Modern C# Language Features
