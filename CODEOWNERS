@@ -1,3 +1,17 @@
 # See: <https://docs.gitlab.com/ee/user/project/code_owners.html>
 # Default match using wildcards
 * @vistaprint-org/vista-engineering/engineering-productivity/developer-productivity
+
+# Foundation, always-loaded context: requires Platform Engineering approval
+.github/AGENTS.md                                    @pedro_m_santos @ericmasiello @twhitner-vp @xavivars @brian_cimpress @jprice-vista @tbrannam @jaSunny 
+
+# Each skill owned by its guild or a senior IC
+.github/skills/testing-standards.md                   @twhitner-vp @pedro_m_santos @xavivars @brian_cimpress @ericmasiello @jprice-vista @tbrannam
+.github/skills/security-expert.md                     @drienf
+.github/skills/observability.md                       @edgarabito @pedro_m_santos @ericmasiello @twhitner-vp @xavivars @brian_cimpress @jprice-vista @tbrannam
+.github/skills/api-design.md                          @pedro_m_santos @ericmasiello @twhitner-vp @xavivars @brian_cimpress @jprice-vista @tbrannam
+.github/skills/performance-optimization.md            @pedro_m_santos @ericmasiello @twhitner-vp @xavivars @brian_cimpress @jprice-vista @tbrannam
+.github/skills/cicd-deployment.md                     @tbonci @dmytro.petryk @twhitner-vp
+.github/skills/documentation-standards.md             @jaSunny @oliverBauer @bmcglynn-vp
+.github/skills/vista-engineering-principles.md        @jaSunny @oliverBauer @bmcglynn-vp
+.github/skills/currency-handling.md                   @pedro_m_santos @ericmasiello @twhitner-vp @xavivars @brian_cimpress @jprice-vista @tbrannam
