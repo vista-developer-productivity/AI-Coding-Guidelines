@@ -44,16 +44,6 @@ After every change: review the code, check for syntax errors, confirm no leftove
 - **CI/CD**: GitLab CI, GitHub Actions
 - **GenAI**: AWS Bedrock, MCP (Model Context Protocol), Python for AI/ML, OpenSearch for vector search
 
-## Repository Structure Guidance
-
-Describe your repo structure to the AI here when adopting this file:
-
-```
-# Example, replace with your actual structure
-# - `/src/api`, REST API handlers
-# - `/src/domain`, Business logic (no framework dependencies)
-# - `/src/infrastructure`, Database, external services
-```
 
 ## Available Skills (On-Demand)
 
@@ -72,15 +62,4 @@ Invoke these for specialized tasks. They are **not loaded by default** to save c
 | `currency-handling` | Monetary values, rounding, ISO 4217, money libraries |
 
 ### Language-Specific Instructions
-
-Applied automatically by file type via `.github/instructions/`:
-- `ts.instructions.md`, TypeScript/JavaScript (`**/*.ts, **/*.js, **/*.tsx, **/*.jsx`)
-- `go.instructions.md`, Go (`**/*.go`)
-- `go-testing.instruction.md`, Go tests (`**/*_test.go`)
-- `python.instructions.md`, Python (`**/*.py`)
-- `csharp.instructions.md`, C#/.NET (`**/*.cs`)
-- `java.instructions.md`, Java (`**/*.java`)
-- `css.instructions.md`, CSS/SCSS (`**/*.css, **/*.scss`)
-- `dbt.instructions.md`, dbt (`dbt/**`)
-- `containerization-docker-best-practices.instructions.md`, Docker (`**/Dockerfile`)
-- `markdown.instructions.md`, Markdown (`**/*.md`)
+Auto-applied by file type via `.github/instructions/*.instructions.md` (TypeScript, Go, Python, C#, Java, CSS, dbt, Docker, Markdown).
