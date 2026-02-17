@@ -36,7 +36,7 @@ After every change: review the code, check for syntax errors, confirm no leftove
 
 - **Languages**: TypeScript (strict mode), Python 3.9+, GoLang, C#, *Java is Hold, avoid for new projects*
 - **Frontend**: React, CSS Modules, Vite, *E2E testing: Playwright (Cypress/Selenium are Hold)*
-- **Backend Frameworks**: Fastify (preferred), FastAPI, Gin, *Express is Trial only, NestJS is Hold*
+- **Backend Frameworks**: Express, NestJS, FastAPI, Gin, *Fastify is assess only, Java SpringBoot is Hold*
 - **Testing**: Vitest (preferred), Jest, Testing Library, Playwright, pytest, testing/go
 - **Cloud**: AWS (Lambda, ECS/Fargate, CDK, Terraform, Pulumi)
 - **Data**: Aurora PostgreSQL, Aurora MySQL, DynamoDB, Valkey/Redis, S3, OpenSearch, *MongoDB is Hold*
