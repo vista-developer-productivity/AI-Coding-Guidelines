@@ -41,7 +41,7 @@ After every change: review the code, check for syntax errors, confirm no leftove
 - **Cloud**: AWS (Lambda, ECS/Fargate, CDK, Terraform, Pulumi)
 - **Data**: Aurora PostgreSQL, Aurora MySQL, DynamoDB, Valkey/Redis, S3, OpenSearch, *MongoDB is Hold*
 - **Observability**: New Relic APM & One, AWS CloudWatch, Bugsnag, OpenTelemetry (Trial), *Hold: DataDog; Remove: Sentry, Wormly, Catchpoint, Tailscale*
-- **CI/CD**: GitLab CI, GitHub Actions
+- **CI/CD**: GitLab CI
 - **GenAI**: AWS Bedrock, MCP (Model Context Protocol), Python for AI/ML, OpenSearch for vector search
 
 
