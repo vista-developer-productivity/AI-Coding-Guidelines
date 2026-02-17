@@ -3,7 +3,6 @@
 ## General Testing Rules
 
 - Write unit tests for all functions and classes, covering critical paths and edge cases
-- Aim for **80%+ code coverage**, **95%+ for critical business logic**
 - Use descriptive test names that explain the scenario and expected outcome
 - Follow **AAA pattern**: Arrange, Act, Assert
 - Mock external dependencies and side effects
@@ -13,7 +12,7 @@
 
 | Language | Unit Testing | E2E Testing |
 |----------|-------------|-------------|
-| TypeScript/JavaScript | **Vitest** (preferred), Jest, Testing Library | **Playwright** (adopted) |
+| TypeScript/JavaScript | **Vitest** (adopt) | **Playwright** (adopt) |
 | Go | `testing/go`, testify assert/require | N/A |
 | Python | pytest | Playwright |
 | C#/.NET | xUnit, Moq/NSubstitute | Playwright |
@@ -23,7 +22,7 @@
 
 ## Test Types
 
-- **Unit Tests**: Single component in isolation. Mock driven ports, fake repositories.
+- **Unit Tests**: Single component in isolation. fake repositories.
 - **Integration Tests**: Real I/O boundaries (database, API, filesystem, time).
 - **E2E Tests**: Full user flows via Playwright. Use `@playwright/test` with locator syntax.
 - **Contract Tests**: HTTP/API contracts only.
@@ -40,7 +39,7 @@
 
 ## Mock Discipline
 
-- ✅ Mock driven ports (external dependencies)
+- ✅ Mock external dependencies
 - ✅ Use fake/in-memory implementations for repositories in acceptance tests
 - ❌ Never mock domain objects (entities, value objects, aggregates)
 - ❌ Never verify queries (only commands with side effects)
