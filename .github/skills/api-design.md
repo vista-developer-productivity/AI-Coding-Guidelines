@@ -39,9 +39,8 @@ Common error codes: 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Fo
 
 | Framework | Status | Language |
 |-----------|--------|----------|
-| **Fastify** | ✅ Adopt (preferred) | TypeScript/Node.js |
-| **ExpressJS** | ⚠️ Trial | TypeScript/Node.js |
+| **Fastify** | ⚠️ Assess  | TypeScript/Node.js |
+| **ExpressJS** | ✅ Adopt| TypeScript/Node.js |
+| **NestJS** | ✅ Adopt| TypeScript/Node.js |
 | **FastAPI** | ✅ Adopt | Python |
-| **Gin** | ✅ Adopt | Go |
-| NestJS | ❌ Hold | TypeScript |
 | Java SpringBoot | ❌ Hold | Java |
