@@ -37,9 +37,9 @@ After every change: review the code, check for syntax errors, confirm no leftove
 - **Languages**: TypeScript (strict mode), Python 3.9+, GoLang, C#, *Java is Hold, avoid for new projects*
 - **Frontend**: React, CSS Modules, Vite, *E2E testing: Playwright (Cypress/Selenium are Hold)*
 - **Backend Frameworks**: Express, NestJS, FastAPI, Gin, *Fastify is assess only, Java SpringBoot is Hold*
-- **Testing**: Vitest (preferred), Jest, Testing Library, Playwright, pytest, testing/go
+- **Testing**: Vitest (preferred), Testing Library, Playwright, pytest, testing/go, *Jest is Hold*
 - **Cloud**: AWS (Lambda, ECS/Fargate, CDK, Terraform, Pulumi)
-- **Data**: Aurora PostgreSQL, Aurora MySQL, DynamoDB, Valkey/Redis, S3, OpenSearch, *MongoDB is Hold*
+- **Data**: Aurora PostgreSQL, Aurora MySQL, DynamoDB, Redis, S3, OpenSearch, *Valkey in Assess*, *MongoDB is Hold*
 - **Observability**: New Relic APM & One, AWS CloudWatch, Bugsnag, OpenTelemetry (Trial), *Hold: DataDog; Remove: Sentry, Wormly, Catchpoint, Tailscale*
 - **CI/CD**: GitLab CI
 - **GenAI**: AWS Bedrock, MCP (Model Context Protocol), Python for AI/ML, OpenSearch for vector search
