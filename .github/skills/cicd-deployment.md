@@ -11,7 +11,7 @@
 
 ## CI/CD Pipeline
 
-- Automate builds, tests, and deployments via CI/CD (**GitLab CI** or **GitHub Actions**)
+- Automate builds, tests, and deployments via CI/CD (**GitLab CI**)
 - Target **15-minute deployment cycles** for rapid feedback
 - Implement quality gates: tests, linting, security scans
 - Use environment-specific configurations
